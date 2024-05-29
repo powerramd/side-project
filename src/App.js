@@ -7,7 +7,7 @@ function App() {
     <BrowserRouter>
         <Header></Header>
         <Routes>
-            <Route path="/" exact element={<FrontPage></FrontPage>}></Route>
+            <Route path="/side-project" exact element={<FrontPage></FrontPage>}></Route>
             <Route path="/sing" exact element={<p>註冊登入</p>}></Route>
         </Routes>
     </BrowserRouter>    

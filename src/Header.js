@@ -14,7 +14,7 @@ function Header() {
   return (
     <div className="avigationBar-menu-container">
         <div className="header_logo-container"> 
-             <Link to="/" >
+             <Link to="/side-project" >
             <img className="header_logo_png" src={Logo} alt="logo"></img> 
             </Link>
         </div>
@@ -22,22 +22,22 @@ function Header() {
             <div className="navigation-menu-top-layer-container-backgroundColor">
                 <ul className="navigation-menu-top-layer">
                     <li className="navigation-menu-item" >
-                        <Link to="/" >
+                        <Link to="/side-project" >
                         <a onClick={() => handleClick("0")} className="navigation-menu-item-label"> 吊飾</a>
                         </Link>
                     </li>
                     <li className="navigation-menu-item">
-                        <Link to="/">
+                        <Link to="/side-project">
                         <a onClick={() => handleClick("1")} className="navigation-menu-item-label">貼紙</a>
                         </Link>
                     </li>
                     <li className="navigation-menu-item">
-                        <Link to="/">
+                        <Link to="/side-project">
                         <a onClick={() => handleClick("2")} className="navigation-menu-item-label">玩偶</a>
                         </Link>
                     </li>
                     <li className="navigation-menu-item">
-                        <Link to="/">
+                        <Link to="/side-project">
                         <a onClick={() => handleClick("3")} className="navigation-menu-item-label">燈飾</a>
                         </Link>
                     </li>
