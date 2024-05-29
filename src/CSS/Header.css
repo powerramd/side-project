@@ -1,0 +1,102 @@
+:root{
+    --menu-background-height: 5em;
+    --menu-background-width: 6.5em;
+    --menu-after-height:3em;
+    --item:4;
+
+}
+
+body{
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.avigationBar-menu-container{
+    display: flex;
+    background-color:#6B818C;
+    height: var(--menu-background-height);
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.navigation-menu-top-layer-container{
+    height: var(--menu-background-height);
+    display: flex;
+    flex: 50;
+    list-style: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigation-menu-top-layer-container-backgroundColor{
+    height: var(--menu-after-height);
+    width: var(--menu-background-width*--item);
+    border-radius: var(--menu-after-height);
+    background-color: #CBBF7A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+#navigation-menu-top-layer-container-backgroundColor-after{
+    content: "";
+    display: block;
+    width: calc(var(--menu-background-width) - (1em));
+    height: calc(var(--menu-after-height) - (1em));
+    margin: 0.5em ;
+    border-radius: 9999px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #6B818C;
+    transform: translateX(0);
+    transition: .3s all ease-in-out ;
+}
+
+.navigation-menu-top-layer{
+    margin: 0;
+    padding: 0;
+    height: var(--menu-background-height);
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    z-index: 10;
+  
+}
+.navigation-menu-item{
+    width: var(--menu-background-width);
+    height: var(--menu-background-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navigation-menu-item a{
+    text-decoration: none;
+}
+.navigation-menu-item-label{
+    color: white;
+    font-size: 18px;
+}
+
+
+
+.header_logo-container{
+    flex: 1;
+    height: 5em;
+    align-items: center;
+    justify-content: center;
+}
+.header_logo_png{
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+    height: 4em;
+}
+.header_login-container a img{
+   width: 2em;
+   height: 2em;
+   margin-right: 0.5em;
+}

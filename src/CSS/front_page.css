@@ -1,0 +1,10 @@
+.CustomPage{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: auto;
+}
+.Grid-row-wrapper{
+    margin: 0 6em;
+}
