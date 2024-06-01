@@ -3,7 +3,7 @@ function FrontPage() {
 return(
     <div className="CustomPage">
         <div className="Grid-row-wrapper">
-            <spawn>測試</spawn>
+            <p>測試</p>
         </div>
     </div>
     )
