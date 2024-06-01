@@ -34,7 +34,7 @@ body{
 
 .menu-layer-bg{
     height: var(--menu-bg-height);
-    width: var(--menu-width*--item);
+    width: var(--menu-width)*var(--item);
     border-radius: var(--menu-bg-height);
     background-color: #CBBF7A;
     display: flex;
