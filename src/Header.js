@@ -8,17 +8,17 @@ import { useState } from "react";
 function Header() {
     const [SliderTransform, setSliderTransform] = useState(0);
 
-    function handleClick(number) {
+    function HandleClick(number) {
         let slider = document.getElementById('navigation-menu-top-layer-container-backgroundColor-after');
         slider.style.transform= "translateX(calc(var(--menu-background-width) * (" + number +"))";
         setSliderTransform(number);
     };
-    function handleMouseEnter (number){
+    function HandleMouseEnter (number){
         let slider = document.getElementById('navigation-menu-top-layer-container-backgroundColor-after');
         slider.style.transform= "translateX(calc(var(--menu-background-width) * (" + number +"))";
 
     };
-    function handleMouseLeave(){
+    function HandleMouseLeave(){
         let slider = document.getElementById('navigation-menu-top-layer-container-backgroundColor-after');
         slider.style.transform="translateX(calc(var(--menu-background-width) * (" + SliderTransform +"))";
     };
@@ -33,24 +33,24 @@ function Header() {
         <div className="navigation-menu-top-layer-container">
             <div className="navigation-menu-top-layer-container-backgroundColor">
                 <ul className="navigation-menu-top-layer">
-                    <li className="navigation-menu-item" onMouseEnter={() => handleMouseEnter("0")} onMouseLeave={handleMouseLeave}>
+                    <li className="navigation-menu-item" onMouseEnter={() => HandleMouseEnter("0")} onMouseLeave={HandleMouseLeave}>
                         <Link to="/side-project" >
-                        <a onClick={() => handleClick("0")} className="navigation-menu-item-label"> 吊飾</a>
+                        <p onClick={() => HandleClick("0")} className="navigation-menu-item-label"> 吊飾</p>
                         </Link>
                     </li>
-                    <li className="navigation-menu-item" onMouseEnter={() => handleMouseEnter("1")} onMouseLeave={handleMouseLeave}>
+                    <li className="navigation-menu-item" onMouseEnter={() => HandleMouseEnter("1")} onMouseLeave={HandleMouseLeave}>
                         <Link to="/side-project">
-                        <a onClick={() => handleClick("1")} className="navigation-menu-item-label">貼紙</a>
+                        <p onClick={() => HandleClick("1")} className="navigation-menu-item-label">貼紙</p>
                         </Link>
                     </li>
-                    <li className="navigation-menu-item" onMouseEnter={() => handleMouseEnter("2")} onMouseLeave={handleMouseLeave}>
+                    <li className="navigation-menu-item" onMouseEnter={() => HandleMouseEnter("2")} onMouseLeave={HandleMouseLeave}>
                         <Link to="/side-project">
-                        <a onClick={() => handleClick("2")} className="navigation-menu-item-label">玩偶</a>
+                        <p onClick={() => HandleClick("2")} className="navigation-menu-item-label">玩偶</p>
                         </Link>
                     </li>
-                    <li className="navigation-menu-item" onMouseEnter={() => handleMouseEnter("3")} onMouseLeave={handleMouseLeave}>
+                    <li className="navigation-menu-item" onMouseEnter={() => HandleMouseEnter("3")} onMouseLeave={HandleMouseLeave}>
                         <Link to="/side-project">
-                        <a onClick={() => handleClick("3")} className="navigation-menu-item-label">燈飾</a>
+                        <p onClick={() => HandleClick("3")} className="navigation-menu-item-label">燈飾</p>
                         </Link>
                     </li>
                 </ul>
