@@ -42,7 +42,7 @@ body{
     align-items: center;
     position: relative;
 }
-#navigation-menu-top-layer-container-backgroundColor-after{
+#slider{
     content: "";
     display: block;
     width: calc(var(--menu-background-width) - (1em));
@@ -76,13 +76,21 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
 }
 .navigation-menu-item a{
     text-decoration: none;
+    height: calc(var(--menu-after-height) - (0px)) ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .navigation-menu-item-label{
     color: white;
+    margin: 0;
+    height: calc(var(--menu-after-height) - (6px)) ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 18px;
 }
 

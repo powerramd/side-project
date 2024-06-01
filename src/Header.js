@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from "react-router-dom";
 import Logo from "./picture/logo.png";
 import User from "./picture/user.png";
@@ -9,18 +8,18 @@ function Header() {
     const [SliderTransform, setSliderTransform] = useState(0);
 
     function HandleClick(number) {
-        let slider = document.getElementById('navigation-menu-top-layer-container-backgroundColor-after');
-        slider.style.transform= "translateX(calc(var(--menu-background-width) * (" + number +"))";
+        let slider = document.getElementById('slider');
+        slider.style.transform= "translateX(calc(var(--menu-background-width) * (" + number +")))";
         setSliderTransform(number);
     };
     function HandleMouseEnter (number){
-        let slider = document.getElementById('navigation-menu-top-layer-container-backgroundColor-after');
-        slider.style.transform= "translateX(calc(var(--menu-background-width) * (" + number +"))";
+        let slider = document.getElementById('slider');
+        slider.style.transform= "translateX(calc(var(--menu-background-width) * (" + number +")))";
 
     };
     function HandleMouseLeave(){
-        let slider = document.getElementById('navigation-menu-top-layer-container-backgroundColor-after');
-        slider.style.transform="translateX(calc(var(--menu-background-width) * (" + SliderTransform +"))";
+        let slider = document.getElementById('slider');
+        slider.style.transform="translateX(calc(var(--menu-background-width) * (" + SliderTransform +")))";
     };
     
   return (
@@ -54,7 +53,7 @@ function Header() {
                         </Link>
                     </li>
                 </ul>
-                <div id="navigation-menu-top-layer-container-backgroundColor-after"></div>
+                <div id="slider"></div>
             </div>
         </div>
         <div className="header_login-container">
