@@ -54,7 +54,7 @@ body{
     left: 0;
     background-color: #6B818C;
     transform: translateX(0);
-    transition: .3s all ease-in-out ;
+    transition: .4s all ease-in-out ;
 }
 
 .navigation-menu-top-layer{
@@ -64,15 +64,19 @@ body{
     display: flex;
     list-style: none;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     z-index: 10;
   
 }
 .navigation-menu-item{
     width: var(--menu-background-width);
-    height: var(--menu-background-height);
+    height: var(--menu-after-height);
+    border-radius: var(--menu-after-height);
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 .navigation-menu-item a{
     text-decoration: none;

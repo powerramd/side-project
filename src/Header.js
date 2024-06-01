@@ -2,14 +2,26 @@
 import { Link } from "react-router-dom";
 import Logo from "./picture/logo.png";
 import User from "./picture/user.png";
+import { useState } from "react";
 
-//取得選單滑塊
-function handleClick(number) {
-    const slider = document.getElementById('navigation-menu-top-layer-container-backgroundColor-after');
-    slider.style.transform= "translateX(calc(var(--menu-background-width) * (" + number +"))";
-}
 
 function Header() {
+    const [SliderTransform, setSliderTransform] = useState(0);
+
+    function handleClick(number) {
+        let slider = document.getElementById('navigation-menu-top-layer-container-backgroundColor-after');
+        slider.style.transform= "translateX(calc(var(--menu-background-width) * (" + number +"))";
+        setSliderTransform(number);
+    };
+    function handleMouseEnter (number){
+        let slider = document.getElementById('navigation-menu-top-layer-container-backgroundColor-after');
+        slider.style.transform= "translateX(calc(var(--menu-background-width) * (" + number +"))";
+
+    };
+    function handleMouseLeave(){
+        let slider = document.getElementById('navigation-menu-top-layer-container-backgroundColor-after');
+        slider.style.transform="translateX(calc(var(--menu-background-width) * (" + SliderTransform +"))";
+    };
     
   return (
     <div className="avigationBar-menu-container">
@@ -21,22 +33,22 @@ function Header() {
         <div className="navigation-menu-top-layer-container">
             <div className="navigation-menu-top-layer-container-backgroundColor">
                 <ul className="navigation-menu-top-layer">
-                    <li className="navigation-menu-item" >
+                    <li className="navigation-menu-item" onMouseEnter={() => handleMouseEnter("0")} onMouseLeave={handleMouseLeave}>
                         <Link to="/side-project" >
                         <a onClick={() => handleClick("0")} className="navigation-menu-item-label"> 吊飾</a>
                         </Link>
                     </li>
-                    <li className="navigation-menu-item">
+                    <li className="navigation-menu-item" onMouseEnter={() => handleMouseEnter("1")} onMouseLeave={handleMouseLeave}>
                         <Link to="/side-project">
                         <a onClick={() => handleClick("1")} className="navigation-menu-item-label">貼紙</a>
                         </Link>
                     </li>
-                    <li className="navigation-menu-item">
+                    <li className="navigation-menu-item" onMouseEnter={() => handleMouseEnter("2")} onMouseLeave={handleMouseLeave}>
                         <Link to="/side-project">
                         <a onClick={() => handleClick("2")} className="navigation-menu-item-label">玩偶</a>
                         </Link>
                     </li>
-                    <li className="navigation-menu-item">
+                    <li className="navigation-menu-item" onMouseEnter={() => handleMouseEnter("3")} onMouseLeave={handleMouseLeave}>
                         <Link to="/side-project">
                         <a onClick={() => handleClick("3")} className="navigation-menu-item-label">燈飾</a>
                         </Link>
