@@ -8,7 +8,7 @@ function App() {
         <Header></Header>
         <Routes>
             <Route path="/side-project" exact element={<FrontPage></FrontPage>}></Route>
-            <Route path="/sing" exact element={<p>註冊登入</p>}></Route>
+            <Route path="/login" exact element={<p>註冊登入</p>}></Route>
         </Routes>
     </BrowserRouter>    
  );
