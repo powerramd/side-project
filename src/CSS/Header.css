@@ -1,19 +1,20 @@
-:root{
+:root {
     --menu-height: 5em;
     --menu-width: 6.5em;
-    --menu-bg-height:3em;
-    --item:5;
+    --menu-bg-height: 3em;
+    --item: 5;
 }
 
-body{
+body {
     margin: 0;
     align-items: center;
     justify-content: center;
 }
 
-.nav-menu-container{
+/*-----------------------------------------------------------*/
+.nav-menu-container {
     display: flex;
-    background-color:#6B818C;
+    background-color: #6B818C;
     height: var(--menu-height);
     align-items: center;
     justify-content: center;
@@ -31,7 +32,8 @@ body{
     align-items: center;
 }
 
-.menu-layer-bg{
+/*-----------------------------------------------------------*/
+.menu-layer-bg {
     height: var(--menu-bg-height);
     width: calc(var(--menu-width)*var(--item));
     border-radius: var(--menu-bg-height);
@@ -41,25 +43,28 @@ body{
     align-items: center;
     position: relative;
 }
-#slider{
+
+#slider {
     content: "";
     display: block;
     width: calc(var(--menu-width) - (1em));
     height: calc(var(--menu-bg-height) - (1em));
-    margin: 0.5em ;
+    margin: 0.5em;
     border-radius: var(--menu-bg-height);
     position: absolute;
     top: 0;
     left: 0;
     background-color: #6B818C;
-    transition: .225s all ease-out ;
+    transition: .225s all ease-out;
 }
 
-.menu-layer{
+/*-----------------------------------------------------------*/
+.menu-layer {
     margin: 0;
     padding: 0;
     height: 3em;
-    width: calc(var(--menu-width)*var(--item));;
+    width: calc(var(--menu-width)*var(--item));
+    ;
     display: flex;
     list-style: none;
     flex-wrap: wrap;
@@ -68,7 +73,8 @@ body{
     border-radius: var(--menu-bg-height);
     z-index: 10;
 }
-.menu-item{
+
+.menu-item {
     width: var(--menu-width);
     height: var(--menu-bg-height);
     border-radius: var(--menu-bg-height);
@@ -76,26 +82,27 @@ body{
     justify-content: center;
     align-items: center;
 }
-.menu-item a{
+
+.menu-item a {
     text-decoration: none;
-    height: calc(var(--menu-bg-height) - (0px)) ;
+    height: calc(var(--menu-bg-height) - (0px));
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.menu-item-label{
+
+.menu-item-label {
     color: white;
     margin: 0;
-    height: calc(var(--menu-bg-height) - (6px)) ;
+    height: calc(var(--menu-bg-height) - (6px));
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 18px;
 }
 
-
-
-.logo-container{
+/*-----------------------------------------------------------*/
+.logo-container {
     height: 3em;
     align-items: center;
     justify-content: center;
@@ -103,17 +110,20 @@ body{
     top: 1em;
     left: 1em;
 }
+
 .logo {
     height: 3em;
     width: 3em;
 }
 
-.login-container{
+.login-container {
     position: absolute;
     top: 1.5em;
-    right: 1em;;
+    right: 1em;
+    ;
 }
-.login-container a img{
+
+.login-container a img {
     width: 2em;
     height: 2em;
     margin: 0;
