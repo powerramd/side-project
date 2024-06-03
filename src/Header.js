@@ -6,7 +6,9 @@ import { useState } from "react";
 
 function Header() {
     const [SliderTransform, setSliderTransform] = useState(0);
+    const [MoveSlider ,setMoveSlider] = useState(0)
 
+    /*滑快也可以使用以下方式進行移動，但因為直接操作了DOM，違反了Recat的開發原則，所以我改使用react virtual dom。
     function getSliderElement() {
         return document.getElementById('slider')
     }
@@ -14,21 +16,25 @@ function Header() {
     function moveSlider(number) {
         const slider = getSliderElement()
         slider.style.transform = `translateX(calc(var(--menu-width) * ${number}))`
-       /* console.log(parseFloat(window.getComputedStyle(slider).transform.match(/matrix\((.+)\)/)[1].split(', ')[4]))
+        console.log(parseFloat(window.getComputedStyle(slider).transform.match(/matrix\((.+)\)/)[1].split(', ')[4]))
         console.log(window.getComputedStyle(slider).transform.match(/matrix\((.+)\)/)[1].split(', '))
-        console.log(window.getComputedStyle(slider).transform)*/
+        console.log(window.getComputedStyle(slider).transform)
     }
+    */
 
     function HandleClick(number) {
-        moveSlider(number)
+        setMoveSlider(number)
         setSliderTransform(number)
+        //moveSlider(number)
     };
     function HandleMouseEnter (number){
-        moveSlider(number)
+        setMoveSlider(number)
+        //moveSlider(number)
 
     };
     function HandleMouseLeave(){
-        moveSlider(SliderTransform)
+        setMoveSlider(SliderTransform)
+        //moveSlider(SliderTransform)
     };
     
   return (
@@ -40,32 +46,37 @@ function Header() {
         </div>
         <div className="menu-layer-container">
             <div className="menu-layer-bg">
-                <ul className="menu-layer">
-                    <li className="menu-item" onMouseEnter={() => HandleMouseEnter("0")} onMouseLeave={HandleMouseLeave}>
+                <ul className="menu-layer" onMouseLeave={HandleMouseLeave}>
+                    <li className="menu-item" onMouseEnter={() => HandleMouseEnter("0")}>
                         <Link to="/side-project" >
-                        <p onClick={() => HandleClick("0")} className="menu-item-label"> 吊飾</p>
+                        <p onClick={() => HandleClick("0")} className="menu-item-label">首頁</p>
                         </Link>
                     </li>
-                    <li className="menu-item" onMouseEnter={() => HandleMouseEnter("1")} onMouseLeave={HandleMouseLeave}>
-                        <Link to="/side-project">
-                        <p onClick={() => HandleClick("1")} className="menu-item-label">貼紙</p>
+                    <li className="menu-item" onMouseEnter={() => HandleMouseEnter("1")}>
+                        <Link to="/side-project" >
+                        <p onClick={() => HandleClick("1")} className="menu-item-label">吊飾</p>
                         </Link>
                     </li>
-                    <li className="menu-item" onMouseEnter={() => HandleMouseEnter("2")} onMouseLeave={HandleMouseLeave}>
+                    <li className="menu-item" onMouseEnter={() => HandleMouseEnter("2")}>
                         <Link to="/side-project">
-                        <p onClick={() => HandleClick("2")} className="menu-item-label">玩偶</p>
+                        <p onClick={() => HandleClick("2")} className="menu-item-label">貼紙</p>
                         </Link>
                     </li>
-                    <li className="menu-item" onMouseEnter={() => HandleMouseEnter("3")} onMouseLeave={HandleMouseLeave}>
+                    <li className="menu-item" onMouseEnter={() => HandleMouseEnter("3")}>
                         <Link to="/side-project">
-                        <p onClick={() => HandleClick("3")} className="menu-item-label">燈飾</p>
+                        <p onClick={() => HandleClick("3")} className="menu-item-label">玩偶</p>
+                        </Link>
+                    </li>
+                    <li className="menu-item" onMouseEnter={() => HandleMouseEnter("4")}>
+                        <Link to="/side-project">
+                        <p onClick={() => HandleClick("4")} className="menu-item-label">燈飾</p>
                         </Link>
                     </li>
                 </ul>
-                <div id="slider"></div>
+                <div id="slider" style ={ {transform : "translateX(" +6.5 * (MoveSlider) + "em)" } }></div>
             </div>
         </div>
-        <div className="login-container">
+        <div className="login-container" >
             <Link to="/sing">
             <img className="user-icon" src={User} alt="user"></img>
             </Link>

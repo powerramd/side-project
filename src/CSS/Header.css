@@ -2,8 +2,7 @@
     --menu-height: 5em;
     --menu-width: 6.5em;
     --menu-bg-height:3em;
-    --item:4;
-
+    --item:5;
 }
 
 body{
@@ -20,12 +19,12 @@ body{
     justify-content: center;
     margin: 0;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    position: relative;
 }
 
 .menu-layer-container {
     height: var(--menu-height);
     display: flex;
-    flex: 50;
     list-style: none;
     flex-wrap: wrap;
     justify-content: center;
@@ -34,7 +33,7 @@ body{
 
 .menu-layer-bg{
     height: var(--menu-bg-height);
-    width: var(--menu-width)*var(--item);
+    width: calc(var(--menu-width)*var(--item));
     border-radius: var(--menu-bg-height);
     background-color: #CBBF7A;
     display: flex;
@@ -48,26 +47,26 @@ body{
     width: calc(var(--menu-width) - (1em));
     height: calc(var(--menu-bg-height) - (1em));
     margin: 0.5em ;
-    border-radius: 9999px;
+    border-radius: var(--menu-bg-height);
     position: absolute;
     top: 0;
     left: 0;
     background-color: #6B818C;
-    transform: translateX(0);
     transition: .225s all ease-out ;
 }
 
 .menu-layer{
     margin: 0;
     padding: 0;
-    height: var(--menu-height);
+    height: 3em;
+    width: calc(var(--menu-width)*var(--item));;
     display: flex;
     list-style: none;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    border-radius: var(--menu-bg-height);
     z-index: 10;
-  
 }
 .menu-item{
     width: var(--menu-width);
@@ -97,18 +96,25 @@ body{
 
 
 .logo-container{
-    flex: 1;
-    height: 5em;
+    height: 3em;
     align-items: center;
     justify-content: center;
+    position: absolute;
+    top: 1em;
+    left: 1em;
 }
-.logo{
-    margin-top: 0.5em;
-    margin-left: 0.5em;
-    height: 4em;
+.logo {
+    height: 3em;
+    width: 3em;
+}
+
+.login-container{
+    position: absolute;
+    top: 1.5em;
+    right: 1em;;
 }
 .login-container a img{
-   width: 2em;
-   height: 2em;
-   margin-right: 0.5em;
+    width: 2em;
+    height: 2em;
+    margin: 0;
 }
