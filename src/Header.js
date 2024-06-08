@@ -9,7 +9,7 @@ function Header() {
     //獲取當前URL的位置，useLocation()是react-router-dom的一個hook，包括 pathname、search、hash、state 等屬性。
     const location = useLocation();
     //設置滑塊動畫過度的初始值
-    const [transition, setTransition] = useState("none")
+    const [transition, setTransition] = useState("none");
     //紀錄當前頁面滑塊的位置
     const [sliderPosition, setSliderPosition] = useState(0);
     //隨著滑鼠懸停而移動滑塊，在滑鼠離開時恢復到當前頁面的位置sliderPosition
