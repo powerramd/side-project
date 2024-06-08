@@ -12,6 +12,8 @@ body {
 }
 
 /*-----------------------------------------------------------*/
+
+/* 導航菜單容器 */
 .nav-menu-container {
     display: flex;
     background-color: #6B818C;
@@ -22,17 +24,18 @@ body {
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     position: relative;
 }
-
+/* 菜單層容器 */
 .menu-layer-container {
     height: var(--menu-height);
     display: flex;
-    list-style: none;
-    flex-wrap: wrap;
+    flex-wrap: wrap;/*當容器空間不足以容納所有的 flex 元素時，設置 flex-wrap: wrap; 可以使 flex 元素換行顯示*/
     justify-content: center;
     align-items: center;
 }
 
 /*-----------------------------------------------------------*/
+
+/* 菜單背景層(黃色圓角) */
 .menu-layer-bg {
     height: var(--menu-bg-height);
     width: calc(var(--menu-width)*var(--item));
@@ -41,38 +44,40 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
+    position: relative;/*相對位置，用於讓兩個元素重疊，並通過z-index:10;設定數字大小決定讓哪個元素顯示在上面*/
 }
-
+/* 滑塊 */
 #slider {
     content: "";
     display: block;
     width: calc(var(--menu-width) - (1em));
     height: calc(var(--menu-bg-height) - (1em));
-    margin: 0.5em;
+    margin: 0.5em;/*將滑塊置中*/
     border-radius: var(--menu-bg-height);
-    position: absolute;
-    top: 0;
+    position: absolute;/*絕對位置*/
+    top: 0;/*設定位置在背景層的左上角*/
     left: 0;
     background-color: #6B818C;
 }
 
 /*-----------------------------------------------------------*/
+
+/* 菜單層 */
 .menu-layer {
     margin: 0;
     padding: 0;
     height: 3em;
     width: calc(var(--menu-width)*var(--item));
-    ;
     display: flex;
-    list-style: none;
-    flex-wrap: wrap;
+    list-style: none;/*消除清單前面的圓點樣式*/
+    flex-wrap: wrap;/*當容器空間不足以容納所有的 flex 元素時，設置 flex-wrap: wrap; 可以使 flex 元素換行顯示*/
     justify-content: center;
     align-items: center;
     border-radius: var(--menu-bg-height);
-    z-index: 10;
+    z-index: 10;/*設定圖層級為最上層*/
 }
 
+/* 菜單項目 */
 .menu-item {
     width: var(--menu-width);
     height: var(--menu-bg-height);
@@ -81,15 +86,15 @@ body {
     justify-content: center;
     align-items: center;
 }
-
+/* 菜單項目Link */
 .menu-item a {
-    text-decoration: none;
+    text-decoration: none;/*消除超連結底線*/
     height: calc(var(--menu-bg-height) - (0px));
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
+/* 菜單項目內容標籤 */
 .menu-item-label {
     color: white;
     margin: 0;
@@ -101,6 +106,7 @@ body {
 }
 
 /*-----------------------------------------------------------*/
+/* Logo容器 */
 .logo-container {
     height: 3em;
     align-items: center;
@@ -109,19 +115,19 @@ body {
     top: 1em;
     left: 1em;
 }
-
+/* Logo圖片 */
 .logo {
     height: 3em;
     width: 3em;
 }
-
+/* 登錄容器 */
 .login-container {
     position: absolute;
     top: 1.5em;
     right: 1em;
     ;
 }
-
+/* 登錄圖片 */
 .login-container a img {
     width: 2em;
     height: 2em;
