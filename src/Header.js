@@ -6,7 +6,7 @@ import User from "./picture/user.png";
 
 
 function Header() {
-    //獲取當前URL的位置，useLocation()是react-router-dom的一個hook`，包括 pathname、search、hash、state 等屬性。
+    //獲取當前URL的位置，useLocation()是react-router-dom的一個hook，包括 pathname、search、hash、state 等屬性。
     const location = useLocation();
     //設置滑塊動畫過度的初始值
     const [transition, setTransition] = useState("none")
