@@ -59,16 +59,16 @@ function Header() {
     function handleSliderEvent(number, eventType) {
         switch (eventType) {
             case 'click':
-                setSliderTransform(number);
-                setSliderPosition(number);
+                setSliderTransform(number);//移動滑塊
+                setSliderPosition(number);//紀錄當前頁面滑塊的位置
                 setTransition(".225s all ease-out");
                 break;
             case 'mouseEnter':
-                setSliderTransform(number);
+                setSliderTransform(number);//移動滑塊
                 setTransition(".225s all ease-out");
                 break;
             case 'mouseLeave':
-                setSliderTransform(sliderPosition);
+                setSliderTransform(sliderPosition);//滑鼠離開時恢復到當前頁面的位置sliderPosition
                 setTransition(".225s all ease-out");
                 break;
             default:
