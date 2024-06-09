@@ -27,29 +27,29 @@ function Header() {
     useEffect(() => {
         switch (location.pathname) {
             case "/side-project1":
+                setTransition("none");
                 setSliderTransform(1);
                 setSliderPosition(1);
-                setTransition("none");
                 break;
             case "/side-project2":
+                setTransition("none");
                 setSliderTransform(2);
                 setSliderPosition(2);
-                setTransition("none");
                 break;
             case "/side-project3":
+                setTransition("none");
                 setSliderTransform(3);
                 setSliderPosition(3);
-                setTransition("none");
                 break;
             case "/side-project4":
+                setTransition("none");
                 setSliderTransform(4);
                 setSliderPosition(4);
-                setTransition("none");
                 break;
             default:
+                setTransition("none");
                 setSliderTransform(0);
                 setSliderPosition(0);
-                setTransition("none");
                 break;
         }
     }, [location.pathname]);
@@ -59,17 +59,16 @@ function Header() {
     function handleSliderEvent(number, eventType) {
         switch (eventType) {
             case 'click':
-                setSliderTransform(number);//移動滑塊
-                setSliderPosition(number);//紀錄當前頁面滑塊的位置
                 setTransition(".225s all ease-out");
+                setSliderPosition(number);//紀錄當前頁面滑塊的位置
                 break;
             case 'mouseEnter':
-                setSliderTransform(number);//移動滑塊
                 setTransition(".225s all ease-out");
+                setSliderTransform(number);//移動滑塊
                 break;
             case 'mouseLeave':
-                setSliderTransform(sliderPosition);//滑鼠離開時恢復到當前頁面的位置sliderPosition
                 setTransition(".225s all ease-out");
+                setSliderTransform(sliderPosition);//滑鼠離開時滑塊恢復到當前頁面的位置sliderPosition
                 break;
             default:
                 break;
