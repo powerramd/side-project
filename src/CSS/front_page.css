@@ -1,10 +1,71 @@
+:root {
+    --page-height: 43em;
+    --page-width: 75em;
+}
+
+
 .CustomPage{
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    display: flex;
     width: 100%;
-    height: auto;
+    height: 100vh;
+    background-color: aquamarine;
+    justify-content: center; 
 }
 .Grid-row-wrapper{
-    margin: 0 6em;
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    background-color: burlywood;
+    width: var(--page-width);
+    height: 100%;
 }
+.Grid-row-wrapper-div{
+    position: relative;
+    background-color: #6b818c;
+    border-radius: 80px;
+    width: 9em;
+    height: 36em;
+    overflow: clip;
+}
+.Grid-row-wrapper div:nth-child(1) {
+    margin-top: 5em;
+}
+.Grid-row-wrapper div:nth-child(2){ 
+    margin-top: 10em;
+}
+.Grid-row-wrapper div:nth-child(3){
+    margin-top: 3em;
+}
+.Grid-row-wrapper div:nth-child(4){
+    margin-top: 11em;
+}
+.Grid-row-wrapper div:nth-child(5){
+    margin-top: 6em;
+}
+.Grid-row-wrapper-img {
+    position: absolute;
+    top: -3em;
+    transform: rotate(91deg);
+    left: -21em;
+    width:auto ;
+    height: 39em;
+    -webkit-user-drag:none;/*讓元素不可被拖動*/
+}
+
+.Grid-row-wrapper .Grid-row-wrapper-div:hover {
+    transform: scale(1.15) ;
+}
+/* .Grid-row-wrapper :nth-child(6){
+    color: black;
+    position: absolute;
+    text-decoration: none;
+    font-size: 11em;
+} */
+/* .Grid-row-wrapper img{
+    width: calc(var(--picture-width) - (8em));
+    height: var(--picture-height);
+    -webkit-mask-image: url(D:\使用者\powerrand\桌面\code\React-project\src\picture\make4.svg);
+    -webkit-mask-position: center center;
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+} */
