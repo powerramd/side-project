@@ -14,7 +14,6 @@
 .Grid-row-wrapper{
     display: flex;
     justify-content: space-evenly;
-    position: relative;
     background-color: burlywood;
     width: var(--page-width);
     height: 100%;
