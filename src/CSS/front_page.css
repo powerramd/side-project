@@ -51,7 +51,7 @@
     -webkit-user-drag:none;/*讓元素不可被拖動*/
 }
 
-.Grid-row-wrapper .Grid-row-wrapper-div:hover {
+.Grid-row-wrapper-div:hover {
     transform: scale(1.15) ;
 }
 /* .Grid-row-wrapper :nth-child(6){

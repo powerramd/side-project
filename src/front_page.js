@@ -1,4 +1,5 @@
-import pendant1 from "./picture/pendant1.jpg";
+import { pendant1 } from './picture/images.js';
+// import pendant1 from "./picture/pendant1.jpg";
 function FrontPage() {
 return(
     <div className="CustomPage">
