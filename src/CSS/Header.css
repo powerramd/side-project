@@ -9,6 +9,7 @@ body {
     margin: 0;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 /*-----------------------------------------------------------*/
@@ -22,7 +23,10 @@ body {
     justify-content: center;
     margin: 0;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-    position: relative;
+    /* 以下這三個是將導航菜單容器釘選在最上方 */
+    position: sticky;
+    top: 0px;
+    z-index: 20;
 }
 /* 菜單層容器 */
 .menu-layer-container {
@@ -38,7 +42,7 @@ body {
 /* 菜單背景層(綠色圓角) */
 .menu-layer-bg {
     height: var(--menu-bg-height);
-    width: calc(var(--menu-width)*var(--item));
+    /* width: calc(var(--menu-width)*var(--item)); */
     border-radius: var(--menu-bg-height);
     background-color: #0d2b14bd;
     /* box-shadow:inset 2px 5px 28px #000000, inset -4px -3px 1px #777c82, inset -7px -7px 8px #696b6e, inset -7px -6px 1px #231815, inset -13px -11px 1px #231815;增加內陰影，讓他有向內凹的立體感 */
