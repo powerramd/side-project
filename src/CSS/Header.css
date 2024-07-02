@@ -11,23 +11,28 @@ body {
     justify-content: center;
     position: relative;
 }
-
 /*-----------------------------------------------------------*/
+
+/* 滾動時的毛玻璃效果 */
+.scrolling .nav-menu-container {
+    background-color: rgba(107, 129, 140, 0.5); /* 半透明 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+}
 
 /* 導航菜單容器 */
 .nav-menu-container {
     display: flex;
-    background-color: #6b818c;
     height: var(--menu-height);
     align-items: center;
     justify-content: center;
     margin: 0;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
     /* 以下這三個是將導航菜單容器釘選在最上方 */
     position: sticky;
     top: 0px;
-    z-index: 20;
+    z-index: 1;
 }
+
 /* 菜單層容器 */
 .menu-layer-container {
     height: var(--menu-height);
@@ -50,7 +55,7 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;/*相對位置，用於讓兩個元素重疊，並通過z-index:10;設定數字大小決定讓哪個元素顯示在上面*/
-    border:2px solid #343f44 ;
+    /* border:2px solid #343f44 ; */
 }
 /* 滑塊 */
 #slider {

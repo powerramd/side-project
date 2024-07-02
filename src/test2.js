@@ -9,7 +9,7 @@ function Test2() {
             var rect = element.getBoundingClientRect(); // 取得元素相對於視口的位置和大小
             var progress = -(rect.top / (element.clientHeight - window.innerHeight)); // 計算滾動進度比例
             // console.log((rect.top / (element.clientHeight - window.innerHeight)));
-            console.log(rect.top);
+            // console.log(rect.top);
 
             // 確保進度值在合理範圍內 (0 到 1 之間)
             if (progress <= 0) {
