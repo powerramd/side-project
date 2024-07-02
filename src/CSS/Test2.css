@@ -38,10 +38,10 @@
 
 /* 水平滾動區塊容器 */
 .section__horizon {
-  top: 0;  /* 距離視口頂部的位置 */
+  top: 80px;  /* 距離視口頂部的位置 */
   position: sticky;  /* 粘性定位 */
   width: 100%;  /* 寬度占滿父容器 */
-  height: 100vh;  /* 高度占滿視口高度 */
+  height: calc(100vh - 80px);  /* 高度占滿視口高度-header的高度 */
   white-space: nowrap;  /* 不換行 */
   overflow-x: auto;  /* 水平滾動條 */
   overflow-y: hidden;  /* 隱藏垂直滾動條 */
@@ -61,7 +61,7 @@
 
 /* 水平滾動區塊子元素 */
 .section__horizon-block {
-  width: 100vw;  /* 寬度占滿視口 */
+  width: 100%;  /* 寬度占滿視口 */
   flex: 0 0 auto;  /* 不彈性縮放 */
   left: 0;  /* 距離父容器左邊界的位置 */
   position: sticky;  /* 粘性定位 */
