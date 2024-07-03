@@ -6,8 +6,8 @@ function Test2() {
   useEffect(() => {
     // 計算滾動進度的函數
     function getProgress(element) {
-      var rect = element.getBoundingClientRect(); // 取得元素相對於視口的位置和大小
-      var progress = -(rect.top / (element.clientHeight - window.innerHeight)); // 計算滾動進度比例
+      const rect = element.getBoundingClientRect(); // 取得元素相對於視口的位置和大小
+      let progress = -(rect.top / (element.clientHeight - window.innerHeight)); // 計算滾動進度比例
       // console.log((rect.top / (element.clientHeight - window.innerHeight)));
       // console.log(rect.top);
 

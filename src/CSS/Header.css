@@ -11,11 +11,11 @@ body {
   justify-content: center;
   position: relative;
 }
+
 /*-----------------------------------------------------------*/
 
 /* 滾動時的毛玻璃效果 */
 .scrolling .nav-menu-container {
-  background-color: rgba(107, 129, 140, 0.5); /* 半透明 */
   backdrop-filter: blur(10px); /* 毛玻璃效果 */
 }
 

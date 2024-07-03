@@ -6,6 +6,5 @@ import "./CSS/Test2.css";
 
 import App from "./App";
 
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App></App>);

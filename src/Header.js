@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState, useLayoutEffect, useEffect } from "react";
+import { useState, useLayoutEffect, useEffect, useCallback } from "react";
 import { Logo, User } from "./picture/images.js";
 // /*import Logo from "./picture/logo.png";
 // import User from "./picture/user.png";*/
@@ -14,7 +14,7 @@ function Header() {
   //隨著滑鼠懸停而移動滑塊，在滑鼠離開時恢復到當前頁面的位置sliderPosition
   const [sliderTransform, setSliderTransform] = useState(0);
   //設定header預設顏色
-  const [containerColor, setContainerColor] = useState("#CCFF66");
+  const [containerColor, setContainerColor] = useState("gray");
   //選單物件
   const [menuItems, setMenuItems] = useState([
     { label: "首頁", link: "/side-project", color: "black" },
@@ -24,112 +24,122 @@ function Header() {
     { label: "燈飾", link: "/side-project4", color: "white" },
   ]);
 
-  //根據URL切換滑塊的位置，location.pathname表示當前 URL 的路徑部分。例如，如果當前 URL 是 http://localhost:3000/side-project1，則 location.pathname 將返回 /side-project1
-  useLayoutEffect(() => {
-    let newPosition = 0;
-    switch (location.pathname) {
+  //根據URL回傳滑塊對應的位置
+  const getSliderPosition = useCallback((pathname) => {
+    switch (pathname) {
       case "/side-project1":
-        newPosition = 1;
+        return 1;
+      case "/side-project2":
+        return 2;
+      case "/side-project3":
+        return 3;
+      case "/side-project4":
+        return 4;
+      default:
+        return 0;
+    }
+  }, []);
+
+  //根據URL更新header背景顏色
+  const updateContainerColor = useCallback((pathname) => {
+    switch (pathname) {
+      case "/side-project1":
+        setContainerColor("red");
+        break;
+      case "/side-project3":
+        setContainerColor("blue");
+        break;
+      case "/side-project4":
         setContainerColor("gray");
         break;
       case "/side-project2":
-        newPosition = 2;
         setContainerColor("#CCFF66");
         break;
-      case "/side-project3":
-        newPosition = 3;
-        setContainerColor("gray");
-        break;
-      case "/side-project4":
-        newPosition = 4;
-        setContainerColor("gray");
-        break;
       default:
-        newPosition = 0;
         setContainerColor("burlywood");
         break;
     }
-    setTransition("none");
-    setSliderTransform(newPosition);
-    setSliderPosition(newPosition);
+  }, []);
+
+  //根據回傳過來的位置更新滑塊位置、選單文字顏色
+  const updateSliderAndMenu = useCallback((position) => {
+    setTransition("none"); // 移除過渡動畫
+    setSliderTransform(position); // 變更滑塊位置
+    setSliderPosition(position); // 儲存滑塊位置
     setMenuItems((prevItems) =>
       prevItems.map((item, index) => ({
         ...item,
-        color: index === newPosition ? "black" : "white",
+        color: index === position ? "black" : "white",
       }))
-    );
-  }, [location.pathname]);
-  /*[location.pathname, sliderPosition] 是作為 useEffect 鉤子的第二個參數，用來指定 useEffect 鉤子的依賴項。當這些依賴項(location.pathname, sliderPosition)中的任何一個發生變化時，useEffect 中的回調函數就會被執行。*/
+    ); // 更新選單文字顏色
+  }, []);
 
   /*將 handleClick、handleMouseEnter 和 handleMouseLeave 三個函數合併為 handleSliderEvent 函數，並根據事件的類型來執行相應的操作*/
-  function handleSliderEvent(number, eventType) {
-    switch (eventType) {
-      case "click":
-        setTransition(".225s all ease-out");
-        setSliderPosition(number); //紀錄當前頁面滑塊的位置
-        setMenuItems((prevItems) =>
-          prevItems.map((item, index) => ({
-            ...item,
-            color: index === number ? "black" : "white",
-          }))
-        );
-        break;
-      case "mouseEnter":
-        setTransition(".225s all ease-out");
-        setSliderTransform(number); //移動滑塊
-        setMenuItems((prevItems) =>
-          prevItems.map((item, index) => ({
-            ...item,
-            color: index === number ? "black" : "white",
-          }))
-        );
-        break;
-      case "mouseLeave":
-        setTransition(".225s all ease-out");
-        setSliderTransform(sliderPosition); //滑鼠離開時滑塊恢復到當前頁面的位置sliderPosition
-        setMenuItems((prevItems) =>
-          prevItems.map((item, index) => ({
-            ...item,
-            color: index === number ? "black" : "white",
-          }))
-        );
-        break;
-      default:
-        break;
-    }
-  }
+  const handleSliderEvent = useCallback(
+    (number, eventType) => {
+      // 變更選單文字顏色
+      const newMenuItems = menuItems.map((item, index) => ({
+        ...item,
+        color: index === number ? "black" : "white",
+      }));
+
+      setTransition(".225s all ease-out"); // 添加過渡動畫
+      switch (eventType) {
+        case "click":
+          setSliderPosition(number);
+          // console.log((window.scrollY));
+          window.scrollTo(0, 0); //頁面跳轉的話將垂直滾度條進度設置為0
+          break;
+        case "mouseEnter":
+          setSliderTransform(number);
+          break;
+        case "mouseLeave":
+          setSliderTransform(sliderPosition);
+          break;
+        default:
+          break;
+      }
+      setMenuItems(newMenuItems); // 更新選單文字顏色
+    },
+    [menuItems, sliderPosition]
+  );
 
   useEffect(() => {
+    //這段函數是垂直滾動的時候將header的背景顏色變成毛玻璃樣式
     function handleScroll() {
       if (window.scrollY > 80) {
-        document.body.classList.add("scrolling");
-        setContainerColor("rgba(107, 129, 140, 0.5)");
+        //當垂直滾動條滾動大於80的時候結果為true
+        document.body.classList.add("scrolling"); //新增.scrolling樣式到CSS
+        setContainerColor("rgba(107, 129, 140, 0.5)"); //將顏色些改為灰色並透明
       } else {
-        document.body.classList.remove("scrolling");
-        switch (location.pathname) {
-          case "/side-project1":
-            setContainerColor("gray");
-            break;
-          case "/side-project2":
-            setContainerColor("#CCFF66");
-            break;
-          case "/side-project3":
-            setContainerColor("gray");
-            break;
-          case "/side-project4":
-            setContainerColor("gray");
-            break;
-          default:
-            setContainerColor("burlywood");
-            break;
-        }
+        document.body.classList.remove("scrolling"); //移除.scrolling樣式到CSS
+        updateContainerColor(location.pathname); //更新header背景顏色
       }
     }
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll); //新增事件監聽氣，垂直滾動的時候觸發上方函數
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", handleScroll); //移除事件監聽
     };
-  }, [location.pathname]);
+  }, [
+    getSliderPosition,
+    location.pathname,
+    updateContainerColor,
+    updateSliderAndMenu,
+  ]);
+
+  //根據URL切換滑塊的位置，並切換背景顏色
+  useLayoutEffect(() => {
+    const newPosition = getSliderPosition(location.pathname); //切換滑塊位置
+    updateSliderAndMenu(newPosition); //更新滑塊位置、和選單文字顏色、移除過度動畫
+    updateContainerColor(location.pathname); //切換背景顏色
+  }, [
+    getSliderPosition,
+    location.pathname,
+    updateContainerColor,
+    updateSliderAndMenu,
+  ]);
+  /*[location.pathname, sliderPosition] 是作為 useLayoutEffect 鉤子的第二個參數，用來指定 useLayoutEffect 鉤子的依賴項。當這些依賴項(location.pathname, sliderPosition)中的任何一個發生變化時，useLayoutEffect 中的回調函數就會被執行。*/
 
   return (
     <div
