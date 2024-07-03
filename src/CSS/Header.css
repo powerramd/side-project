@@ -1,124 +1,124 @@
 :root {
-    --menu-height: 5em;
-    --menu-width: 6.5em;
-    --menu-bg-height: 3em;
-    --item: 5;
+  --menu-height: 5em;
+  --menu-width: 6.5em;
+  --menu-bg-height: 3em;
+  --item: 5;
 }
 
 body {
-    margin: 0;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 /*-----------------------------------------------------------*/
 
 /* 滾動時的毛玻璃效果 */
 .scrolling .nav-menu-container {
-    background-color: rgba(107, 129, 140, 0.5); /* 半透明 */
-    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+  background-color: rgba(107, 129, 140, 0.5); /* 半透明 */
+  backdrop-filter: blur(10px); /* 毛玻璃效果 */
 }
 
 /* 導航菜單容器 */
 .nav-menu-container {
-    display: flex;
-    height: var(--menu-height);
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
-    /* 以下這三個是將導航菜單容器釘選在最上方 */
-    position: sticky;
-    top: 0px;
-    z-index: 1;
+  display: flex;
+  height: var(--menu-height);
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
+  /* 以下這三個是將導航菜單容器釘選在最上方 */
+  position: sticky;
+  top: 0px;
+  z-index: 1;
 }
 
 /* 菜單層容器 */
 .menu-layer-container {
-    height: var(--menu-height);
-    display: flex;
-    flex-wrap: wrap;/*當容器空間不足以容納所有的 flex 元素時，設置 flex-wrap: wrap; 可以使 flex 元素換行顯示*/
-    justify-content: center;
-    align-items: center;
+  height: var(--menu-height);
+  display: flex;
+  flex-wrap: wrap; /*當容器空間不足以容納所有的 flex 元素時，設置 flex-wrap: wrap; 可以使 flex 元素換行顯示*/
+  justify-content: center;
+  align-items: center;
 }
 
 /*-----------------------------------------------------------*/
 
 /* 菜單背景層(綠色圓角) */
 .menu-layer-bg {
-    height: var(--menu-bg-height);
-    /* width: calc(var(--menu-width)*var(--item)); */
-    border-radius: var(--menu-bg-height);
-    background-color: #0d2b14bd;
-    /* box-shadow:inset 2px 5px 28px #000000, inset -4px -3px 1px #777c82, inset -7px -7px 8px #696b6e, inset -7px -6px 1px #231815, inset -13px -11px 1px #231815;增加內陰影，讓他有向內凹的立體感 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;/*相對位置，用於讓兩個元素重疊，並通過z-index:10;設定數字大小決定讓哪個元素顯示在上面*/
-    /* border:2px solid #343f44 ; */
+  height: var(--menu-bg-height);
+  /* width: calc(var(--menu-width)*var(--item)); */
+  border-radius: var(--menu-bg-height);
+  background-color: #0d2b14bd;
+  /* box-shadow:inset 2px 5px 28px #000000, inset -4px -3px 1px #777c82, inset -7px -7px 8px #696b6e, inset -7px -6px 1px #231815, inset -13px -11px 1px #231815;增加內陰影，讓他有向內凹的立體感 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /*相對位置，用於讓兩個元素重疊，並通過z-index:10;設定數字大小決定讓哪個元素顯示在上面*/
+  /* border:2px solid #343f44 ; */
 }
 /* 滑塊 */
 #slider {
-    content: "";
-    display: block;
-    width: calc(var(--menu-width) - (1em));
-    height: calc(var(--menu-bg-height) - (1em));
-    margin: 0.5em;/*將滑塊置中*/
-    border-radius: var(--menu-bg-height);
-    position: absolute;/*絕對位置*/
-    top: 0;/*設定位置在背景層的左上角*/
-    left: 0;
-    background-color: #E2C17C;
-    box-shadow: 6px 3.6px 0.2em #221b0bd2;/*增加內陰影，讓他有膠囊形狀3D的感覺，並增加外陰影使他像是浮起來*/
+  content: "";
+  display: block;
+  width: calc(var(--menu-width) - (1em));
+  height: calc(var(--menu-bg-height) - (1em));
+  margin: 0.5em; /*將滑塊置中*/
+  border-radius: var(--menu-bg-height);
+  position: absolute; /*絕對位置*/
+  top: 0; /*設定位置在背景層的左上角*/
+  left: 0;
+  background-color: #e2c17c;
+  box-shadow: 6px 3.6px 0.2em #221b0bd2; /*增加內陰影，讓他有膠囊形狀3D的感覺，並增加外陰影使他像是浮起來*/
 }
 
 /*-----------------------------------------------------------*/
 
 /* 菜單層 */
 .menu-layer {
-    margin: 0;
-    padding: 0;
-    height: 3em;
-    width: calc(var(--menu-width)*var(--item));
-    border-radius: var(--menu-bg-height);
-    display: flex;
-    list-style: none;/*消除清單前面的圓點樣式*/
-    flex-wrap: wrap;/*當容器空間不足以容納所有的 flex 元素時，設置 flex-wrap: wrap; 可以使 flex 元素換行顯示*/
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;/*以一排正序的方式排序*/
-    z-index: 10;/*設定圖層級為最上層*/
+  margin: 0;
+  padding: 0;
+  height: 3em;
+  width: calc(var(--menu-width) * var(--item));
+  border-radius: var(--menu-bg-height);
+  display: flex;
+  list-style: none; /*消除清單前面的圓點樣式*/
+  flex-wrap: wrap; /*當容器空間不足以容納所有的 flex 元素時，設置 flex-wrap: wrap; 可以使 flex 元素換行顯示*/
+  justify-content: center;
+  align-items: center;
+  flex-direction: row; /*以一排正序的方式排序*/
+  z-index: 10; /*設定圖層級為最上層*/
 }
 
 /* 菜單項目 */
 .menu-item {
-    width: var(--menu-width);
-    height: var(--menu-bg-height);
-    border-radius: var(--menu-bg-height);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: var(--menu-width);
+  height: var(--menu-bg-height);
+  border-radius: var(--menu-bg-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 /* 菜單項目Link */
 .menu-item a {
-    text-decoration: none;/*消除超連結底線*/
-    height: calc(var(--menu-bg-height) - (0px));
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    -webkit-user-drag:none;/*讓元素不可被拖動*/
+  text-decoration: none; /*消除超連結底線*/
+  height: calc(var(--menu-bg-height) - (0px));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-user-drag: none; /*讓元素不可被拖動*/
 }
 /* 菜單項目內容標籤 */
 .menu-item-label {
-    color: rgb(255, 255, 255);
-    margin: 0 0 0 0;
-    height: calc(var(--menu-bg-height) - (6px));
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    transition: 0.4s all ease-in-out;
-    /* text-shadow: 
+  color: rgb(255, 255, 255);
+  margin: 0 0 0 0;
+  height: calc(var(--menu-bg-height) - (6px));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  transition: 0.4s all ease-in-out;
+  /* text-shadow: 
     1px 1px 1px #000, 
     -1px -1px 1px #fff; */
 }
@@ -130,31 +130,32 @@ body {
 /*-----------------------------------------------------------*/
 /* Logo容器 */
 .logo-container {
-    height: 3em;
-    width: 3em;
-    position: absolute;
-    top: 1em;
-    left: 1em;
+  height: 3em;
+  width: 3em;
+  position: absolute;
+  top: 1em;
+  left: 1em;
 }
 /* Logo圖片 */
-.logo,.logo-container a {
-    display: block;/*使其寬高占滿整個logo容器元素*/
-    -webkit-user-drag:none;/*讓元素不可被拖動*/
-    height: 3em;
-    width: 3em;
+.logo,
+.logo-container a {
+  display: block; /*使其寬高占滿整個logo容器元素*/
+  -webkit-user-drag: none; /*讓元素不可被拖動*/
+  height: 3em;
+  width: 3em;
 }
 /* 登錄容器 */
 .login-container {
-    position: absolute;
-    top: 1.5em;
-    right: 1em;
-    ;
+  position: absolute;
+  top: 1.5em;
+  right: 1em;
 }
 /* 登錄圖片 */
-.login-container a img, .login-container a{
-    display: block;/*使其寬高占滿整個logo容器元素*/
-    -webkit-user-drag:none;/*讓元素不可被拖動*/
-    width: 2em;
-    height: 2em;
-    margin: 0;
+.login-container a img,
+.login-container a {
+  display: block; /*使其寬高占滿整個logo容器元素*/
+  -webkit-user-drag: none; /*讓元素不可被拖動*/
+  width: 2em;
+  height: 2em;
+  margin: 0;
 }

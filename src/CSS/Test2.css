@@ -1,119 +1,118 @@
 /* 整體區塊樣式設置 */
 .section {
-  width: 100%;  /* 寬度占滿視口 */
-
+  width: 100%; /* 寬度占滿視口 */
 }
 
 /* 區塊 -a 的樣式 */
 .section.-a {
-  font-size: 6vw;  /* 字體大小 */
-  height: 100vh;  /* 高度占滿視口 */
-  background-color: #CCFF66;  /* 淡綠色背景 */
+  font-size: 6vw; /* 字體大小 */
+  height: 100vh; /* 高度占滿視口 */
+  background-color: #ccff66; /* 淡綠色背景 */
 }
 
 /* 區塊 -b 的樣式 */
 .section.-b {
-  color: #001514;  /* 深灰色文字 */
-  height: 500vh;  /* 500% 視口高度 */
-  position: relative;  /* 相對定位 */
-  background-color: #4E6E58;  /* 深綠色背景 */
+  color: #001514; /* 深灰色文字 */
+  height: 500vh; /* 500% 視口高度 */
+  position: relative; /* 相對定位 */
+  background-color: #4e6e58; /* 深綠色背景 */
 }
 
 /* 區塊 -c 的樣式 */
 .section.-c {
-  font-size: 2vw;  /* 字體大小 */
-  font-weight: 100;  /* 字體粗細 */
-  height: 100vh;  /* 高度占滿視口 */
-  color: #fff;  /* 白色文字 */
-  background-color: #001514;  /* 深灰色背景 */
+  font-size: 2vw; /* 字體大小 */
+  font-weight: 100; /* 字體粗細 */
+  height: 100vh; /* 高度占滿視口 */
+  color: #fff; /* 白色文字 */
+  background-color: #001514; /* 深灰色背景 */
 }
 
 /* 區塊 -c 中的鏈接樣式 */
 .section.-c a {
-  font-size: 16px;  /* 字體大小 */
-  opacity: .3;  /* 透明度 */
-  color: #fff;  /* 白色文字 */
-  display: block;  /* 塊級元素顯示 */
+  font-size: 16px; /* 字體大小 */
+  opacity: 0.3; /* 透明度 */
+  color: #fff; /* 白色文字 */
+  display: block; /* 塊級元素顯示 */
 }
 
 /* 水平滾動區塊容器 */
 .section__horizon {
-  top: 80px;  /* 距離視口頂部的位置 */
-  position: sticky;  /* 粘性定位 */
-  width: 100%;  /* 寬度占滿父容器 */
-  height: calc(100vh - 80px);  /* 高度占滿視口高度-header的高度 */
-  white-space: nowrap;  /* 不換行 */
-  overflow-x: auto;  /* 水平滾動條 */
-  overflow-y: hidden;  /* 隱藏垂直滾動條 */
-  display: flex;  /* 使用彈性盒模型排列子元素 */
+  top: 80px; /* 距離視口頂部的位置 */
+  position: sticky; /* 粘性定位 */
+  width: 100%; /* 寬度占滿父容器 */
+  height: calc(100vh - 80px); /* 高度占滿視口高度-header的高度 */
+  white-space: nowrap; /* 不換行 */
+  overflow-x: auto; /* 水平滾動條 */
+  overflow-y: hidden; /* 隱藏垂直滾動條 */
+  display: flex; /* 使用彈性盒模型排列子元素 */
 }
 
 /* 水平滾動條設置 */
 .section__horizon::-webkit-scrollbar {
-  height: 10px;  /* 滾動條高度 */
+  height: 10px; /* 滾動條高度 */
 }
 .section__horizon::-webkit-scrollbar-track {
-  background: #CCFF66;  /* 淡綠色滾動條軌道 */
+  background: #ccff66; /* 淡綠色滾動條軌道 */
 }
 .section__horizon::-webkit-scrollbar-thumb {
-  background: #000;  /* 黑色滾動條滑塊 */
+  background: #000; /* 黑色滾動條滑塊 */
 }
 
 /* 水平滾動區塊子元素 */
 .section__horizon-block {
-  width: 100%;  /* 寬度占滿視口 */
-  flex: 0 0 auto;  /* 不彈性縮放 */
-  left: 0;  /* 距離父容器左邊界的位置 */
-  position: sticky;  /* 粘性定位 */
+  width: 100%; /* 寬度占滿視口 */
+  flex: 0 0 auto; /* 不彈性縮放 */
+  left: 0; /* 距離父容器左邊界的位置 */
+  position: sticky; /* 粘性定位 */
 }
 
 /* 水平滾動區塊子元素中的內容 div */
 .section__horizon-block > div {
-  width: 100%;  /* 寬度占滿父容器 */
-  height: 100%;  /* 高度占滿父容器 */
-  font-size: 6vw;  /* 字體大小 */
-  display: flex;  /* 使用彈性盒模型排列子元素 */
-  align-items: center;  /* 垂直居中對齊 */
-  justify-content: center;  /* 水平居中對齊 */
+  width: 100%; /* 寬度占滿父容器 */
+  height: 100%; /* 高度占滿父容器 */
+  font-size: 6vw; /* 字體大小 */
+  display: flex; /* 使用彈性盒模型排列子元素 */
+  align-items: center; /* 垂直居中對齊 */
+  justify-content: center; /* 水平居中對齊 */
 }
 
 /* 水平滾動區塊子元素中的內容 span */
 .section__horizon-block > span {
-  font-size: 4vw;  /* 字體大小 */
-  writing-mode: vertical-lr;  /* 垂直寫入模式 */
-  padding: 1vw;  /* 內邊距 */
+  font-size: 4vw; /* 字體大小 */
+  writing-mode: vertical-lr; /* 垂直寫入模式 */
+  padding: 1vw; /* 內邊距 */
 }
 
 /* 第二個區塊的樣式 */
 .section__horizon-block:nth-child(2) {
-  left: 10vw;  /* 距離父容器左邊界的位置 */
-  background-color: #BCAA99;  /* 淺灰色背景 */
+  left: 10vw; /* 距離父容器左邊界的位置 */
+  background-color: #bcaa99; /* 淺灰色背景 */
 }
 
 /* 第三個區塊的樣式 */
 .section__horizon-block:nth-child(3) {
-  left: 20vw;  /* 距離父容器左邊界的位置 */
-  background-color: #645986;  /* 深灰色背景 */
+  left: 20vw; /* 距離父容器左邊界的位置 */
+  background-color: #645986; /* 深灰色背景 */
 }
 
 /* 第四個區塊的樣式 */
 .section__horizon-block:nth-child(4) {
-  left: 30vw;  /* 距離父容器左邊界的位置 */
-  background-color: #BCAA99;  /* 淺灰色背景 */
+  left: 30vw; /* 距離父容器左邊界的位置 */
+  background-color: #bcaa99; /* 淺灰色背景 */
 }
 
 /* 第五個區塊的樣式 */
 .section__horizon-block:nth-child(5) {
-  background-color: #CCFF66;  /* 淡綠色背景 */
+  background-color: #ccff66; /* 淡綠色背景 */
 }
 
 /* 區塊文本的樣式 */
 .section__text {
-  width: 100%;  /* 寬度占滿父容器 */
-  height: 100%;  /* 高度占滿父容器 */
-  display:flex;  /* 使用彈性盒模型排列子元素 */
-  align-items: center;  /* 垂直居中對齊 */
-  justify-content: center;  /* 水平居中對齊 */
-  flex-direction: column;  /* 垂直方向排列 */
-  gap: .5rem;  /* 子元素之間的間距 */
+  width: 100%; /* 寬度占滿父容器 */
+  height: 100%; /* 高度占滿父容器 */
+  display: flex; /* 使用彈性盒模型排列子元素 */
+  align-items: center; /* 垂直居中對齊 */
+  justify-content: center; /* 水平居中對齊 */
+  flex-direction: column; /* 垂直方向排列 */
+  gap: 0.5rem; /* 子元素之間的間距 */
 }
