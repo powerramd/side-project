@@ -120,10 +120,7 @@ function Header() {
         setContainerColor("rgba(107, 129, 140, 0.3)"); //將顏色些改為灰色並透明
       } else {
         document.body.classList.remove("scrolling"); //移除body的.scrolling樣式類別
-        setContainerColor(
-          menuItems[getMenuItemIndexFromPathname(location.pathname)]
-            .containerColor
-        ); //更新header背景顏色
+        setContainerColor(menuItems[getMenuItemIndexFromPathname(location.pathname)].containerColor); //更新header背景顏色
       }
     }
 
@@ -142,21 +139,12 @@ function Header() {
       updateSliderAndMenu(newPosition);
       setContainerColor(menuItems[newPosition].containerColor);
     }
-  }, [
-    getMenuItemIndexFromPathname,
-    updateSliderAndMenu,
-    sliderPosition,
-    location.pathname,
-    menuItems,
-  ]);
+  }, [getMenuItemIndexFromPathname, updateSliderAndMenu, sliderPosition, location.pathname, menuItems]);
   /*[location.pathname,....] 是作為 useLayoutEffect 鉤子的第二個參數，用來指定 useLayoutEffect 鉤子的依賴項。當這些依賴項(location.pathname,....)中的任何一個發生變化時，useLayoutEffect 中的回調函數就會被執行。*/
 
   //======================================================================================================================================================================================================================
   return (
-    <div
-      className="nav-menu-container"
-      style={{ backgroundColor: containerColor }}
-    >
+    <div className="nav-menu-container" style={{ backgroundColor: containerColor }}>
       <div className="logo-container">
         <Link to="/side-project">
           <img className="logo" src={Logo} alt="logo"></img>
@@ -164,22 +152,11 @@ function Header() {
       </div>
       <div className="menu-layer-container">
         <div className="menu-layer-bg">
-          <ul
-            className="menu-layer"
-            onMouseLeave={() => handleSliderEvent(sliderPosition, "mouseLeave")}
-          >
+          <ul className="menu-layer" onMouseLeave={() => handleSliderEvent(sliderPosition, "mouseLeave")}>
             {menuItems.map((item, index) => (
-              <li
-                key={index}
-                className="menu-item"
-                onMouseEnter={() => handleSliderEvent(index, "mouseEnter")}
-              >
+              <li key={index} className="menu-item" onMouseEnter={() => handleSliderEvent(index, "mouseEnter")}>
                 <Link to={item.link}>
-                  <p
-                    onClick={() => handleSliderEvent(index, "click")}
-                    className="menu-item-label"
-                    style={{ color: item.color }}
-                  >
+                  <p onClick={() => handleSliderEvent(index, "click")} className="menu-item-label" style={{ color: item.color }}>
                     {item.label}
                   </p>
                 </Link>
