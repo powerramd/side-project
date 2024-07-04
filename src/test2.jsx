@@ -26,8 +26,7 @@ function Test2() {
       if (horizonRef.current) {
         // 確保 horizonRef 引用存在
         // 根據滾動進度計算並設置水平滾動區塊容器的滾動位置
-        horizonRef.current.children[0].scrollLeft =
-          getProgress(horizonRef.current) * window.innerWidth * 4;
+        horizonRef.current.children[0].scrollLeft = getProgress(horizonRef.current) * window.innerWidth * 4;
       }
     }
 

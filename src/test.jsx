@@ -18,20 +18,10 @@ function Test() {
         <path d="M 10 10 V 100" stroke="red" strokewidt="2" fill="none" />
       </svg>
       <svg width="300" height="100" viewBox="0 0 300 100">
-        <path
-          d="M 10 80 C 40 10, 65 10, 95 80"
-          stroke="blue"
-          strokewidt="2"
-          fill="none"
-        />
+        <path d="M 10 80 C 40 10, 65 10, 95 80" stroke="blue" strokewidt="2" fill="none" />
       </svg>
       <svg width="300" height="190" viewBox="0 0 300 100">
-        <path
-          d="M 10 80 C 40 10, 65 20, 90 0 S 150 150, 180 80"
-          stroke="green"
-          strokewidt="2"
-          fill="none"
-        />
+        <path d="M 10 80 C 40 10, 65 20, 90 0 S 150 150, 180 80" stroke="green" strokewidt="2" fill="none" />
       </svg>
     </>
   );

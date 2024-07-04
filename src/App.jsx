@@ -8,11 +8,7 @@ function App() {
     <BrowserRouter>
       <Header></Header>
       <Routes>
-        <Route
-          path="/side-project"
-          exact
-          element={<FrontPage></FrontPage>}
-        ></Route>
+        <Route path="/side-project" exact element={<FrontPage></FrontPage>}></Route>
         <Route path="/side-project1" exact element={<Test></Test>}></Route>
         <Route path="/side-project2" exact element={<Test2></Test2>}></Route>
         <Route path="/side-project3" exact element={<p>測試3</p>}></Route>
