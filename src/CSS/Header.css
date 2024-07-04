@@ -16,12 +16,15 @@ body {
 
 /* 滾動時的毛玻璃效果 */
 .scrolling .nav-menu-container {
-  backdrop-filter: blur(10px); /* 毛玻璃效果 */
+  transition: 0.4s all ease-out;
+  backdrop-filter: blur(6px) ;/* 毛玻璃效果 */
+  /* border-radius: 999px; */
 }
 
 /* 導航菜單容器 */
 .nav-menu-container {
   display: flex;
+  width: 100%;
   height: var(--menu-height);
   align-items: center;
   justify-content: center;
@@ -35,6 +38,7 @@ body {
 
 /* 菜單層容器 */
 .menu-layer-container {
+  width: calc(var(--menu-width) * var(--item));
   height: var(--menu-height);
   display: flex;
   flex-wrap: wrap; /*當容器空間不足以容納所有的 flex 元素時，設置 flex-wrap: wrap; 可以使 flex 元素換行顯示*/
@@ -50,7 +54,7 @@ body {
   /* width: calc(var(--menu-width)*var(--item)); */
   border-radius: var(--menu-bg-height);
   background-color: #0d2b14bd;
-  /* box-shadow:inset 2px 5px 28px #000000, inset -4px -3px 1px #777c82, inset -7px -7px 8px #696b6e, inset -7px -6px 1px #231815, inset -13px -11px 1px #231815;增加內陰影，讓他有向內凹的立體感 */
+  /* box-shadow:inset 2px 5px 28px #000000, inset -4px -3px 1px #777c82, inset -7px -7px 8px #696b6e, inset -7px -6px 1px #231815, inset -13px -11px 1px #231815; 增加內陰影，讓他有向內凹的立體感*/
   display: flex;
   justify-content: center;
   align-items: center;
