@@ -17,7 +17,7 @@ body {
 /* 滾動時的毛玻璃效果 */
 .scrolling .nav-menu-container {
   transition: 0.4s all ease-out;
-  backdrop-filter: blur(6px) ;/* 毛玻璃效果 */
+  backdrop-filter: blur(6px); /* 毛玻璃效果 */
   /* border-radius: 999px; */
 }
 
