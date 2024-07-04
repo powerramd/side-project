@@ -28,6 +28,14 @@
       "react-app/jest"
     ]
   },
+  "prettier": {
+  "singleQuote": false,
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "semi": true,
+  "useTabs": false,
+  "printWidth": 100
+  },
   "browserslist": {
     "production": [
       ">0.2%",
