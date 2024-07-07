@@ -4,7 +4,7 @@ import { Logo, User } from "./picture/images.js";
 // /*import Logo from "./picture/logo.png";
 // import User from "./picture/user.png";*/
 
-function Header({ updatecursorEliminate }) {
+function Header({ onUpdatecursorEliminate }) {
   //獲取當前URL的位置，useLocation()是react-router-dom的一個hook，包括 pathname、search、hash、state 等屬性。
   const location = useLocation();
   //設置滑塊動畫過度的初始值
@@ -121,18 +121,18 @@ function Header({ updatecursorEliminate }) {
           break;
         case "mouseEnter":
           setSliderTransform(number);
-          updatecursorEliminate(true);
+          onUpdatecursorEliminate(true);
           break;
         case "mouseLeave":
           setSliderTransform(sliderPosition);
-          updatecursorEliminate(false);
+          onUpdatecursorEliminate(false);
           break;
         default:
           break;
       }
       setMenuItems(newMenuItems); // 更新選單文字顏色
     },
-    [menuItems, sliderPosition, updatecursorEliminate]
+    [menuItems, sliderPosition, onUpdatecursorEliminate]
   );
 
   //======================================================================================================================================================================================================================

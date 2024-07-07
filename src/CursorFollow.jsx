@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-function CursorTrail({ setcursorEliminateSwitch }) {
+function CursorTrail({ propsSetcursorEliminateSwitch }) {
   //獲取當前URL的位置，useLocation()是react-router-dom的一個hook，包括 pathname、search、hash、state 等屬性。
 
   const [position, setPosition] = useState({ x: -80, y: -80 }); // 初始化紅點位置為視窗左上角
@@ -34,7 +34,7 @@ function CursorTrail({ setcursorEliminateSwitch }) {
   }, []); // 空依賴性陣列，確保 useEffect 只在組件掛載和卸載時執行
 
   // 渲染方法，返回一個可以跟隨滑鼠軌跡的紅點元素
-  return <div className="Cursor" style={{ transform: `translate3D(${position.x - 18}px, ${position.y - 98}px, 0)`, backgroundColor: setcursorEliminateSwitch }} />;
+  return <div className="Cursor" style={{ transform: `translate3D(${position.x - 18}px, ${position.y - 98}px, 0)`, backgroundColor: propsSetcursorEliminateSwitch }} />;
 }
 
 export default CursorTrail;

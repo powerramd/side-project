@@ -7,23 +7,24 @@ import Test from "./Test";
 import Test2 from "./Test2";
 import Test3 from "./Test3";
 import Test4 from "./Test4";
+
 function App() {
   const [cursorEliminateSwitch, setCursorEliminateSwitch] = useState("rgba(139, 0, 0,0.7)");
 
   function updatecursorEliminate(isHover) {
     if (isHover) {
       // console.log(isHover)
-      setCursorEliminateSwitch("rgba(139, 0, 0,0)")
-    } else { 
-      setCursorEliminateSwitch("rgba(139, 0, 0,0.7)")
+      setCursorEliminateSwitch("rgba(139, 0, 0,0)");
+    } else {
+      setCursorEliminateSwitch("rgba(139, 0, 0,0.7)");
       // console.log(isHover)
     }
   }
 
   return (
     <BrowserRouter>
-      <Header updatecursorEliminate={updatecursorEliminate} />
-      <CursorFollow setcursorEliminateSwitch={cursorEliminateSwitch} />
+      <Header onUpdatecursorEliminate={updatecursorEliminate} />
+      <CursorFollow propsSetcursorEliminateSwitch={cursorEliminateSwitch} />
       <Routes>
         <Route path="/side-project" exact element={<FrontPage />}></Route>
         <Route path="/side-project1" exact element={<Test />}></Route>
