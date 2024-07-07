@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState, useLayoutEffect, useEffect, useCallback } from "react";
+import { useState,useRef , useLayoutEffect, useEffect, useCallback } from "react";
 import { Logo, User } from "./picture/images.js";
 // /*import Logo from "./picture/logo.png";
 // import User from "./picture/user.png";*/
@@ -7,6 +7,8 @@ import { Logo, User } from "./picture/images.js";
 function Header({ onUpdatecursorEliminate }) {
   //獲取當前URL的位置，useLocation()是react-router-dom的一個hook，包括 pathname、search、hash、state 等屬性。
   const location = useLocation();
+  //用來讓其他元件互動的hood，useRef可以讓其他元件方便取用元素的屬性，這裡是鉤到菜單背景層(綠色圓角).menu-layer-bg 
+  const menuLayerRef = useRef(null);
   //設置滑塊動畫過度的初始值
   const [transition, setTransition] = useState("none");
   //紀錄當前滑塊的位置
@@ -176,7 +178,7 @@ function Header({ onUpdatecursorEliminate }) {
         </Link>
       </div>
       <div className="menu-layer-container">
-        <div className="menu-layer-bg" style={{ width: menuLayerBg }}>
+        <div className="menu-layer-bg" ref={menuLayerRef} style={{ width: menuLayerBg }}>
           <ul className="menu-layer" onMouseLeave={() => handleEvent(sliderPosition, "mouseLeave")}>
             {menuItems.map((item) => (
               <li key={item.ID} className="menu-item" onMouseEnter={() => handleEvent(item.ID, "mouseEnter")}>
