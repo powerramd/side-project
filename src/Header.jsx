@@ -4,72 +4,95 @@ import { Logo, User } from "./picture/images.js";
 // /*import Logo from "./picture/logo.png";
 // import User from "./picture/user.png";*/
 
-function Header() {
+function Header({ updatecursorEliminate }) {
   //獲取當前URL的位置，useLocation()是react-router-dom的一個hook，包括 pathname、search、hash、state 等屬性。
   const location = useLocation();
   //設置滑塊動畫過度的初始值
   const [transition, setTransition] = useState("none");
-  //紀錄當前頁面滑塊的位置
+  //紀錄當前滑塊的位置
   const [sliderPosition, setSliderPosition] = useState(0);
   //隨著滑鼠懸停而移動滑塊，在滑鼠離開時恢復到當前頁面的位置sliderPosition
   const [sliderTransform, setSliderTransform] = useState(0);
-  //設定header預設顏色
+  //設定header預設顏色初始值
   const [containerColor, setContainerColor] = useState("gray");
-  //選單物件
+  //切換header的className
+  const [containerClass, setContainerClass] = useState("");
+  //選單物件(如果有新增或刪除物件請修改getMenuItemIndexFromPathname()函數，並在App.jsx裡面新增對應的路由) Link和ID 應為唯一值
   const [menuItems, setMenuItems] = useState([
     {
-      label: "首頁",
+      ID: 0,
       link: "/side-project",
+      label: "首頁",
       color: "black",
       containerColor: "burlywood",
     },
     {
-      label: "吊飾",
+      ID: 1,
       link: "/side-project1",
+      label: "吊飾",
       color: "white",
       containerColor: "red",
     },
     {
-      label: "貼紙",
+      ID: 2,
       link: "/side-project2",
+      label: "貼紙",
       color: "white",
       containerColor: "#CCFF66",
     },
     {
-      label: "玩偶",
+      ID: 3,
       link: "/side-project3",
+      label: "玩偶",
       color: "white",
       containerColor: "gray",
     },
     {
-      label: "燈飾",
+      ID: 4,
       link: "/side-project4",
+      label: "燈飾",
       color: "white",
       containerColor: "blue",
     },
+    {
+      ID: 5,
+      link: "/side-project5",
+      label: "測試",
+      color: "white",
+      containerColor: "yellow",
+    },
   ]);
-  //setContainerColor[getUrlPosition(location.pathname)].containerColor
+  //menuItems[0].containerColor
+  //console.log(menuItems.length);
+
+  //設定菜單背景層(綠色圓角)的寬度初始值
+  const menuLayerBg = `calc(var(--menu-width) * ${menuItems.length})`;
 
   //根據路徑名稱獲取選單物件的索引
-  const getMenuItemIndexFromPathname = useCallback((pathname) => {
-    switch (pathname) {
-      case "/side-project1":
-        return 1;
-      case "/side-project2":
-        return 2;
-      case "/side-project3":
-        return 3;
-      case "/side-project4":
-        return 4;
-      default:
-        return 0;
-    }
-  }, []);
+  const getMenuItemIndexFromPathname = useCallback(
+    (pathname) => {
+      switch (pathname) {
+        case menuItems[1].link:
+          return menuItems[1].ID;
+        case menuItems[2].link:
+          return menuItems[2].ID;
+        case menuItems[3].link:
+          return menuItems[3].ID;
+        case menuItems[4].link:
+          return menuItems[4].ID;
+        case menuItems[5].link:
+          return menuItems[5].ID;
+        default:
+          return menuItems[0].ID;
+      }
+    },
+    [menuItems]
+  );
 
   //根據回傳過來的位置更新滑塊位置、選單文字顏色
   const updateSliderAndMenu = useCallback((position) => {
     setTransition("none"); // 移除過渡動畫
-    setSliderTransform(position); // 變更滑塊位置
+    setSliderTransform(position); //更新滑塊位置
     setSliderPosition(position); // 儲存滑塊位置
     setMenuItems((prevItems) =>
       prevItems.map((item, index) => ({
@@ -80,7 +103,7 @@ function Header() {
   }, []);
 
   /*將 handleClick、handleMouseEnter 和 handleMouseLeave 三個函數合併為 handleSliderEvent 函數，並根據事件的類型來執行相應的操作*/
-  const handleSliderEvent = useCallback(
+  const handleEvent = useCallback(
     (number, eventType) => {
       // 變更選單文字顏色
       const newMenuItems = menuItems.map((item, index) => ({
@@ -91,23 +114,25 @@ function Header() {
       setTransition(".225s all ease-out"); // 添加過渡動畫
       switch (eventType) {
         case "click":
-          setSliderPosition(number);
+          setSliderPosition(number); //更新滑塊位置
           setContainerColor(menuItems[number].containerColor); //更新header背景顏色
           // console.log((window.scrollY));
           window.scrollTo(0, 0); //頁面跳轉的話將垂直滾度條進度設置為0
           break;
         case "mouseEnter":
           setSliderTransform(number);
+          updatecursorEliminate(true);
           break;
         case "mouseLeave":
           setSliderTransform(sliderPosition);
+          updatecursorEliminate(false);
           break;
         default:
           break;
       }
       setMenuItems(newMenuItems); // 更新選單文字顏色
     },
-    [menuItems, sliderPosition]
+    [menuItems, sliderPosition, updatecursorEliminate]
   );
 
   //======================================================================================================================================================================================================================
@@ -116,10 +141,10 @@ function Header() {
     function handleScroll() {
       if (window.scrollY > 80) {
         //當垂直滾動條滾動大於80的時候結果為true
-        document.body.classList.add("scrolling"); //新增.scrolling樣式類別到body
+        setContainerClass("scrolling"); //切換成毛玻璃的效果
         setContainerColor("rgba(107, 129, 140, 0.3)"); //將顏色些改為灰色並透明
       } else {
-        document.body.classList.remove("scrolling"); //移除body的.scrolling樣式類別
+        setContainerClass(""); //移除毛玻璃的效果
         setContainerColor(menuItems[getMenuItemIndexFromPathname(location.pathname)].containerColor); //更新header背景顏色
       }
     }
@@ -132,31 +157,31 @@ function Header() {
 
   //----------------------------------------------------------------------------------------------------------------
 
-  //根據URL切換滑塊的位置和選單文字顏色，並切換header背景顏色
+  //根據URL(重新整理時)切換滑塊的位置和選單文字顏色，並切換header背景顏色
   useLayoutEffect(() => {
-    const newPosition = getMenuItemIndexFromPathname(location.pathname); //設定URL位置
+    const newPosition = getMenuItemIndexFromPathname(location.pathname); //根據URL位置回傳菜單物件對應的ID
     if (newPosition !== sliderPosition) {
-      updateSliderAndMenu(newPosition);
-      setContainerColor(menuItems[newPosition].containerColor);
+      updateSliderAndMenu(newPosition); //更新滑塊位置、移除過渡動畫、更新選單文字顏色
+      setContainerColor(menuItems[newPosition].containerColor); //更新header背景顏色
     }
   }, [getMenuItemIndexFromPathname, updateSliderAndMenu, sliderPosition, location.pathname, menuItems]);
   /*[location.pathname,....] 是作為 useLayoutEffect 鉤子的第二個參數，用來指定 useLayoutEffect 鉤子的依賴項。當這些依賴項(location.pathname,....)中的任何一個發生變化時，useLayoutEffect 中的回調函數就會被執行。*/
 
   //======================================================================================================================================================================================================================
   return (
-    <div className="nav-menu-container" style={{ backgroundColor: containerColor }}>
+    <div className={`nav-menu-container ${containerClass}`} style={{ backgroundColor: containerColor }}>
       <div className="logo-container">
         <Link to="/side-project">
           <img className="logo" src={Logo} alt="logo"></img>
         </Link>
       </div>
       <div className="menu-layer-container">
-        <div className="menu-layer-bg">
-          <ul className="menu-layer" onMouseLeave={() => handleSliderEvent(sliderPosition, "mouseLeave")}>
-            {menuItems.map((item, index) => (
-              <li key={index} className="menu-item" onMouseEnter={() => handleSliderEvent(index, "mouseEnter")}>
+        <div className="menu-layer-bg" style={{ width: menuLayerBg }}>
+          <ul className="menu-layer" onMouseLeave={() => handleEvent(sliderPosition, "mouseLeave")}>
+            {menuItems.map((item) => (
+              <li key={item.ID} className="menu-item" onMouseEnter={() => handleEvent(item.ID, "mouseEnter")}>
                 <Link to={item.link}>
-                  <p onClick={() => handleSliderEvent(index, "click")} className="menu-item-label" style={{ color: item.color }}>
+                  <p onClick={() => handleEvent(item.ID, "click")} className="menu-item-label" style={{ color: item.color }}>
                     {item.label}
                   </p>
                 </Link>

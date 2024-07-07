@@ -2,7 +2,6 @@
   --menu-height: 5em;
   --menu-width: 6.5em;
   --menu-bg-height: 3em;
-  --item: 5;
 }
 
 body {
@@ -15,9 +14,10 @@ body {
 /*-----------------------------------------------------------*/
 
 /* 滾動時的毛玻璃效果 */
-.scrolling .nav-menu-container {
+.scrolling{
   transition: 0.4s all ease-out;
   backdrop-filter: blur(6px); /* 毛玻璃效果 */
+  -webkit-backdrop-filter:blur(6px)
   /* border-radius: 999px; */
 }
 
@@ -51,14 +51,13 @@ body {
 /* 菜單背景層(綠色圓角) */
 .menu-layer-bg {
   height: var(--menu-bg-height);
-  /* width: calc(var(--menu-width)*var(--item)); */
   border-radius: var(--menu-bg-height);
   background-color: #0d2b14bd;
-  /* box-shadow:inset 2px 5px 28px #000000, inset -4px -3px 1px #777c82, inset -7px -7px 8px #696b6e, inset -7px -6px 1px #231815, inset -13px -11px 1px #231815; 增加內陰影，讓他有向內凹的立體感*/
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative; /*相對位置，用於讓兩個元素重疊，並通過z-index:10;設定數字大小決定讓哪個元素顯示在上面*/
+  /* box-shadow:inset 2px 5px 28px #000000, inset -4px -3px 1px #777c82, inset -7px -7px 8px #696b6e, inset -7px -6px 1px #231815, inset -13px -11px 1px #231815; 增加內陰影，讓他有向內凹的立體感*/
   /* border:2px solid #343f44 ; */
 }
 /* 滑塊 */
