@@ -4,8 +4,8 @@ import CursorFollow from "./CursorFollow";
 import Header from "./Header";
 import FrontPage from "./front_page";
 import Test from "./Test";
-import Test2 from "./Test2";
 import Test3 from "./Test3";
+import HorizontalScroll from "./HorizontalScroll";
 import Test4 from "./Test4";
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
       <Routes>
         <Route path="/side-project" exact element={<FrontPage />}></Route>
         <Route path="/side-project1" exact element={<Test />}></Route>
-        <Route path="/side-project2" exact element={<Test2 />}></Route>
+        <Route path="/side-project2" exact element={<HorizontalScroll />}></Route>
         <Route path="/side-project3" exact element={<Test3 />}></Route>
         <Route path="/side-project4" exact element={<Test4 />}></Route>
         <Route path="/side-project5" exact element={<p>測試5</p>}></Route>

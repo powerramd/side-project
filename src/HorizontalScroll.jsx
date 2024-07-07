@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-function Test2() {
+function HorizontalScroll() {
   const horizonRef = useRef(null); // 創建一個 useRef 鉤子來引用水平滾動區塊容器
 
   useEffect(() => {
@@ -74,4 +74,4 @@ function Test2() {
   );
 }
 
-export default Test2;
+export default HorizontalScroll;
