@@ -1,9 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 
 function CursorFollow({ propsSetcursorEliminateSwitch }) {
-  const [position, setPosition] = useState({ x: 0, y: 0 }); // 初始化紅點位置為視窗左上角
+  //會跟隨鼠標的 紅點元素預設值
   const [defaultStyle, setDefaultStyle] = useState({ width: "40px", height: "40px", scale: 1 });
-  const trail = useRef([]); //使用 useRef 來保存滑鼠軌跡
+  // 初始化紅點位置為視窗左上角
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  //使用 useRef 來保存滑鼠軌跡
+  const trail = useRef([]);
+  //判斷鼠標與hader.js底部的距離用的
+  const distance = position.y - 80;
 
   //紀錄滑鼠軌跡的函式-------------------------------------------------------------------------------------------------------
   useEffect(() => {
@@ -43,8 +48,8 @@ function CursorFollow({ propsSetcursorEliminateSwitch }) {
     };
   }, [trail]);
 
-  // 修改 scale 的值的函數
-  // eslint-disable-next-line no-unused-vars
+  //修改 scale 的值的函數
+  /* eslint-disable-next-line no-unused-vars*/
   function updateScale(newScale) {
     setDefaultStyle((prevStyle) => ({
       ...prevStyle,
@@ -52,12 +57,21 @@ function CursorFollow({ propsSetcursorEliminateSwitch }) {
     }));
   }
 
-  // 新增計算與菜單層距離的函數-------------------------------------------------------------------------------
+  // 計算與菜單層距離的函數-------------------------------------------------------------------------------
   useEffect(() => {
     function handleMenuInteraction() {
+      //抓取hader.js的元素(綠色圓角)
       const menuLayer = document.querySelector(".menu-layer-bg");
+      function calculateOutput(x) {
+        const maxiDetectionRange = 26;
+        if (x < maxiDetectionRange) {
+          return maxiDetectionRange - x;
+        } else {
+          return 0;
+        }
+      }
+
       if (menuLayer) {
-        const distance = position.y - 80;
         // 根據距離調整特定的樣式或操作
         if (distance < -10 + parseInt(defaultStyle.width.substring(0, 2) / 2)) {
           menuLayer.style.backgroundColor = "black"; // 例如，改變菜單背景色.
@@ -69,13 +83,14 @@ function CursorFollow({ propsSetcursorEliminateSwitch }) {
           menuLayer.style.backgroundColor = ""; // 恢復原來的背景色
         }
       }
+      console.log(`${distance}:` + calculateOutput(distance));
     }
 
     window.addEventListener("mousemove", handleMenuInteraction);
     return () => {
       window.removeEventListener("mousemove", handleMenuInteraction);
     };
-  }, [position, defaultStyle.width]);
+  }, [position, defaultStyle, distance]);
 
   const circleStyle = {
     zIndex: "100000",
@@ -96,7 +111,7 @@ function CursorFollow({ propsSetcursorEliminateSwitch }) {
   return (
     <>
       <p>{position.y - 80}</p>
-      <div ID="Cursor" style={circleStyle} />
+      <div id="Cursor" style={circleStyle} />
     </>
   );
 }
