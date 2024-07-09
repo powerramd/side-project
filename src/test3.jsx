@@ -1,5 +1,4 @@
 import React from "react";
-import Test4 from "./Test4";
 
 function Test3() {
   return (
@@ -25,7 +24,6 @@ function Test3() {
           </defs>
         </svg>
       </div>
-      <Test4></Test4>
     </>
   );
 }

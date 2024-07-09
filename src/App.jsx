@@ -7,6 +7,7 @@ import Test from "./Test";
 import Test3 from "./Test3";
 import HorizontalScroll from "./HorizontalScroll";
 import Test4 from "./Test4";
+import DynamicPathHeight from "./DynamicPathHeight";
 
 function App() {
   const [cursorEliminateSwitch, setCursorEliminateSwitch] = useState("rgba(139, 0, 0,0.7)");
@@ -24,14 +25,14 @@ function App() {
   return (
     <BrowserRouter>
       <Header onUpdatecursorEliminate={updatecursorEliminate} />
-      <CursorFollow propsSetcursorEliminateSwitch={cursorEliminateSwitch} />
+      {/* <CursorFollow propsSetcursorEliminateSwitch={cursorEliminateSwitch} /> */}
       <Routes>
         <Route path="/side-project" exact element={<FrontPage />}></Route>
         <Route path="/side-project1" exact element={<Test />}></Route>
         <Route path="/side-project2" exact element={<HorizontalScroll />}></Route>
         <Route path="/side-project3" exact element={<Test3 />}></Route>
         <Route path="/side-project4" exact element={<Test4 />}></Route>
-        <Route path="/side-project5" exact element={<p>測試5</p>}></Route>
+        <Route path="/side-project5" exact element={<DynamicPathHeight />}></Route>
         <Route path="/login" exact element={<p>註冊登入</p>}></Route>
       </Routes>
     </BrowserRouter>

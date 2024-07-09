@@ -62,14 +62,6 @@ function CursorFollow({ propsSetcursorEliminateSwitch }) {
     function handleMenuInteraction() {
       //抓取hader.js的元素(綠色圓角)
       const menuLayer = document.querySelector(".menu-layer-bg");
-      function calculateOutput(x) {
-        const maxiDetectionRange = 26;
-        if (x < maxiDetectionRange) {
-          return maxiDetectionRange - x;
-        } else {
-          return 0;
-        }
-      }
 
       if (menuLayer) {
         // 根據距離調整特定的樣式或操作
@@ -81,6 +73,14 @@ function CursorFollow({ propsSetcursorEliminateSwitch }) {
           menuLayer.style.backgroundColor = "blue";
         } else {
           menuLayer.style.backgroundColor = ""; // 恢復原來的背景色
+        }
+      }
+      function calculateOutput(x) {
+        const maxiDetectionRange = 26;
+        if (x < maxiDetectionRange) {
+          return maxiDetectionRange - x;
+        } else {
+          return 0;
         }
       }
       console.log(`${distance}:` + calculateOutput(distance));
