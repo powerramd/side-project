@@ -8,6 +8,7 @@ import Test3 from "./Test3";
 import HorizontalScroll from "./HorizontalScroll";
 import Test4 from "./Test4";
 import DynamicPathHeight from "./DynamicPathHeight";
+import BezierCurve from "./BezierCurve";
 
 function App() {
   const [cursorEliminateSwitch, setCursorEliminateSwitch] = useState("rgba(139, 0, 0,0.7)");
@@ -33,7 +34,7 @@ function App() {
         <Route path="/side-project3" exact element={<Test3 />}></Route>
         <Route path="/side-project4" exact element={<Test4 />}></Route>
         <Route path="/side-project5" exact element={<DynamicPathHeight />}></Route>
-        <Route path="/login" exact element={<p>註冊登入</p>}></Route>
+        <Route path="/login" exact element={<BezierCurve />}></Route>
       </Routes>
     </BrowserRouter>
   );
