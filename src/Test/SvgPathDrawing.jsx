@@ -1,4 +1,8 @@
-function Test() {
+import BezierCurve from "./BezierCurve";
+import BezierMotion from "./BezierMotion";
+import SvgAnimation from "./SvgAnimation";
+
+function SvgPathDrawing() {
   return (
     <>
       <svg width="400" height="200">
@@ -23,8 +27,12 @@ function Test() {
       <svg width="300" height="190" viewBox="0 0 300 100">
         <path d="M 10 80 C 40 10, 65 20, 90 0 S 150 150, 180 80" stroke="green" strokewidt="2" fill="none" />
       </svg>
+
+      <BezierMotion />
+      <BezierCurve />
+      <SvgAnimation />
     </>
   );
 }
 
-export default Test;
+export default SvgPathDrawing;

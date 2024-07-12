@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 
-function Test4() {
+function SvgAnimation() {
   const [forTest, setForTest] = useState(null);
   const [forTest2, setForTest2] = useState(null);
   const [forTest3, setForTest3] = useState(null);
@@ -219,4 +219,4 @@ function Test4() {
   );
 }
 
-export default Test4;
+export default SvgAnimation;

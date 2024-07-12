@@ -4,8 +4,8 @@ import "./CSS/Header.css";
 import "./CSS/front_page.css";
 import "./CSS/HorizontalScroll.css";
 import "./CSS/CursorFollow.css";
-import "./CSS/Test3.css";
-import "./CSS/Test4.css";
+import "./Test/Css/Test.css";
+
 
 import App from "./App";
 

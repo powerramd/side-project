@@ -42,6 +42,7 @@ body {
   flex-wrap: wrap; /*當容器空間不足以容納所有的 flex 元素時，設置 flex-wrap: wrap; 可以使 flex 元素換行顯示*/
   justify-content: center;
   align-items: center;
+  
 }
 
 /*-----------------------------------------------------------*/
@@ -50,7 +51,7 @@ body {
 .menu-layer-bg {
   height: var(--menu-bg-height);
   border-radius: var(--menu-bg-height);
-  background-color: #0d2b14bd;
+  background-color: #0d2b14;
   display: flex;
   justify-content: center;
   align-items: center;

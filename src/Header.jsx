@@ -1,14 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useRef, useLayoutEffect, useEffect, useCallback } from "react";
 import { Logo, User } from "./picture/images.js";
+import CursorFollow from "./CursorFollow.jsx";
 // /*import Logo from "./picture/logo.png";
 // import User from "./picture/user.png";*/
 
-function Header({ onUpdatecursorEliminate }) {
+function Header({ onEvent }) {
   //獲取當前URL的位置，useLocation()是react-router-dom的一個hook，包括 pathname、search、hash、state 等屬性。
   const location = useLocation();
-  //用來讓其他元件互動的hood，useRef可以讓其他元件方便取用元素的屬性，這裡是鉤到菜單背景層(綠色圓角).menu-layer-bg
-  const menuLayerRef = useRef(null);
+
   //設置滑塊動畫過度的初始值
   const [transition, setTransition] = useState("none");
   //紀錄當前滑塊的位置
@@ -33,14 +33,14 @@ function Header({ onUpdatecursorEliminate }) {
       link: "/side-project1",
       label: "吊飾",
       color: "white",
-      containerColor: "red",
+      containerColor: "#CCFF66",
     },
     {
       ID: 2,
       link: "/side-project2",
       label: "貼紙",
       color: "white",
-      containerColor: "#CCFF66",
+      containerColor: "red",
     },
     {
       ID: 3,
@@ -64,11 +64,23 @@ function Header({ onUpdatecursorEliminate }) {
       containerColor: "yellow",
     },
   ]);
-  //menuItems[0].containerColor
-  //console.log(menuItems.length);
-
   //設定菜單背景層(綠色圓角)的寬度初始值
   const menuLayerBg = `calc(var(--menu-width) * ${menuItems.length})`;
+
+  //用來讓其他元件互動的hood，useRef可以讓其他元件方便取用元素的屬性，這裡是鉤到菜單背景層(綠色圓角).menu-layer-bg
+  const [menuContainerWidth, setMenuContainerWidth] = useState(0);
+  const menuContainerRef = useRef(null);
+  function updateWidth ()  {
+    if (menuContainerRef.current) {
+      setMenuContainerWidth(menuContainerRef.current.offsetWidth);
+    }
+  };
+  useEffect(() => {
+    updateWidth(); // 初始化宽度
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
+  }, []);
+
 
   //根據路徑名稱獲取選單物件的索引
   const getMenuItemIndexFromPathname = useCallback(
@@ -123,18 +135,16 @@ function Header({ onUpdatecursorEliminate }) {
           break;
         case "mouseEnter":
           setSliderTransform(number);
-          onUpdatecursorEliminate(true);
           break;
         case "mouseLeave":
           setSliderTransform(sliderPosition);
-          onUpdatecursorEliminate(false);
           break;
         default:
           break;
       }
       setMenuItems(newMenuItems); // 更新選單文字顏色
     },
-    [menuItems, sliderPosition, onUpdatecursorEliminate]
+    [menuItems, sliderPosition]
   );
 
   //======================================================================================================================================================================================================================
@@ -157,7 +167,7 @@ function Header({ onUpdatecursorEliminate }) {
     return () => {
       window.removeEventListener("scroll", handleScroll); //移除事件監聽
     };
-  }, [getMenuItemIndexFromPathname, location.pathname, menuItems]);
+  }, [getMenuItemIndexFromPathname, location.pathname, menuItems, onEvent]);
 
   //----------------------------------------------------------------------------------------------------------------
 
@@ -173,14 +183,15 @@ function Header({ onUpdatecursorEliminate }) {
 
   //======================================================================================================================================================================================================================
   return (
-    <div className={`nav-menu-container ${containerClass}`} style={{ backgroundColor: containerColor }}>
+    <div className={`nav-menu-container ${containerClass}`} style={{ backgroundColor: containerColor }} ref={menuContainerRef}>
       <div className="logo-container">
         <Link to="/side-project">
           <img className="logo" src={Logo} alt="logo"></img>
         </Link>
       </div>
       <div className="menu-layer-container">
-        <div className="menu-layer-bg" ref={menuLayerRef} style={{ width: menuLayerBg }}>
+        <div className="menu-layer-bg" style={{ width: menuLayerBg }}>
+          <CursorFollow props={{memenuContainerWidth:menuContainerWidth }} />
           <ul className="menu-layer" onMouseLeave={() => handleEvent(sliderPosition, "mouseLeave")}>
             {menuItems.map((item) => (
               <li key={item.ID} className="menu-item" onMouseEnter={() => handleEvent(item.ID, "mouseEnter")}>

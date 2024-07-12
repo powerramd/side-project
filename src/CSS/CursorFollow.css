@@ -1,12 +1,11 @@
-/* 
-.Cursor {
-  z-index: 100000;
-  position: fixed;
-  width: 40px;
-  height: 40px;
-  top: 50%;
-  left: 50%;
-  border-radius: 50%;
+.Cursor_container {
+  position:fixed;
+  top:calc( var(--menu-height)/5);
+  width: 100%;
   pointer-events: none;
-  transition: 0.15s ease-out;
-} */
+}
+
+.gooey {
+  filter: url(#gooey);
+}
+
