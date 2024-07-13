@@ -66,7 +66,7 @@ function Header({ onEvent }) {
   ]);
   //設定菜單背景層(綠色圓角)的寬度初始值
   const menuLayerBg = `calc(var(--menu-width) * ${menuItems.length})`;
-
+//======================================================================================================================================================================================================================
   //用來讓其他元件互動的hood，useRef可以讓其他元件方便取用元素的屬性，這裡是鉤到菜單背景層(綠色圓角).menu-layer-bg
   const [menuContainerWidth, setMenuContainerWidth] = useState(0);
   const menuContainerRef = useRef(null);
@@ -77,10 +77,10 @@ function Header({ onEvent }) {
   };
   useEffect(() => {
     updateWidth(); // 初始化宽度
-    window.addEventListener('resize', updateWidth);
+    window.addEventListener('resize', updateWidth);//視窗大小變化的監聽器
     return () => window.removeEventListener('resize', updateWidth);
   }, []);
-
+//======================================================================================================================================================================================================================
 
   //根據路徑名稱獲取選單物件的索引
   const getMenuItemIndexFromPathname = useCallback(
@@ -178,6 +178,7 @@ function Header({ onEvent }) {
       updateSliderAndMenu(newPosition); //更新滑塊位置、移除過渡動畫、更新選單文字顏色
       setContainerColor(menuItems[newPosition].containerColor); //更新header背景顏色
     }
+
   }, [getMenuItemIndexFromPathname, updateSliderAndMenu, sliderPosition, location.pathname, menuItems]);
   /*[location.pathname,....] 是作為 useLayoutEffect 鉤子的第二個參數，用來指定 useLayoutEffect 鉤子的依賴項。當這些依賴項(location.pathname,....)中的任何一個發生變化時，useLayoutEffect 中的回調函數就會被執行。*/
 

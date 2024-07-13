@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 function CursorFollow({ props }) {
   //會跟隨鼠標的 紅點元素預設值
-  const [defaultStyle, setDefaultStyle] = useState({ width: "40px", height: "40px", scale: 2 });
+  const [defaultStyle, setDefaultStyle] = useState({ width: "40px", height: "40px", scale: 1 });
   // 初始化紅點位置為視窗左上角
   const [position, setPosition] = useState({ x: 0, y: 0 });
   //使用 useRef 來保存滑鼠軌跡
@@ -17,7 +17,6 @@ function CursorFollow({ props }) {
       setcursorContainerWidth(cursorContainerRef.current.offsetWidth);
       setLeftPosition((props.memenuContainerWidth - cursorContainerWidth) / 2);
     }
-    console.log(parseInt(defaultStyle.height.substring(0, 2)) / 2);
   };
   useEffect(() => {
     calculateCenterPosition();
@@ -27,7 +26,7 @@ function CursorFollow({ props }) {
   useEffect(() => {
     function handleMouseMove(event) {
       const { clientX, clientY } = event; // 從事件對象中獲取滑鼠的客戶端坐標
-      trail.current = [...trail.current, { x: clientX, y: clientY }].slice(-20); // 只保留最新的 20 個位置
+      trail.current = [...trail.current, { x: clientX, y: clientY }].slice(-200); // 只保留最新的 200 個位置
     }
 
     // 設置滑鼠移動事件監聽器和定時器來更新位置
@@ -44,14 +43,8 @@ function CursorFollow({ props }) {
     function updatePosition() {
       if (trail.current.length > 0) {
         const nextPosition = trail.current[0]; // 取得當前索引處的軌跡點作為下一個位置
-        // console.log("----以下還沒刪除前----");
-        // console.log(trail.current);
         trail.current = trail.current.slice(1); // 刪除已使用的軌跡點
-        // console.log("----以下是刪除----");
-        // console.log(trail.current);
         setPosition(nextPosition); // 更新紅點的位置為下一個軌跡點
-        // console.log("----以下是更新----");
-        // console.log(position);
       }
     }
 
@@ -70,7 +63,6 @@ function CursorFollow({ props }) {
     }));
   }
 
- 
   const CursorContainer = {
     zIndex: -1,
     left: leftPosition,
@@ -187,4 +179,3 @@ export default CursorFollow;
 //     window.removeEventListener("mousemove", handleMenuInteraction);
 //   };
 // }, [position, defaultStyle, distance]);
-
