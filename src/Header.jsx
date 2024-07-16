@@ -8,7 +8,6 @@ import CursorFollow from "./CursorFollow.jsx";
 function Header({ onEvent }) {
   //獲取當前URL的位置，useLocation()是react-router-dom的一個hook，包括 pathname、search、hash、state 等屬性。
   const location = useLocation();
-
   //設置滑塊動畫過度的初始值
   const [transition, setTransition] = useState("none");
   //紀錄當前滑塊的位置
@@ -26,7 +25,7 @@ function Header({ onEvent }) {
       link: "/side-project",
       label: "首頁",
       color: "black",
-      containerColor: "burlywood",
+      containerColor: "rgba(252, 247, 248, 1)",
     },
     {
       ID: 1,
@@ -65,22 +64,22 @@ function Header({ onEvent }) {
     },
   ]);
   //設定菜單背景層(綠色圓角)的寬度初始值
-  const menuLayerBg = `calc(var(--menu-width) * ${menuItems.length})`;
-//======================================================================================================================================================================================================================
-  //用來讓其他元件互動的hood，useRef可以讓其他元件方便取用元素的屬性，這裡是鉤到菜單背景層(綠色圓角).menu-layer-bg
+  const [menuLayerBgWidth] = useState(`calc(var(--menu-width) * ${menuItems.length})`);
+  //======================================================================================================================================================================================================================
+  //用來讓其他元件互動的hook，useRef可以讓其他元件方便取用元素的屬性，這裡是鉤到菜單背景層(綠色圓角).menu-layer-bg
   const [menuContainerWidth, setMenuContainerWidth] = useState(0);
   const menuContainerRef = useRef(null);
-  function updateWidth ()  {
+  function updateWidth() {
     if (menuContainerRef.current) {
       setMenuContainerWidth(menuContainerRef.current.offsetWidth);
     }
-  };
+  }
   useEffect(() => {
     updateWidth(); // 初始化宽度
-    window.addEventListener('resize', updateWidth);//視窗大小變化的監聽器
-    return () => window.removeEventListener('resize', updateWidth);
+    window.addEventListener("resize", updateWidth); //視窗大小變化的監聽器
+    return () => window.removeEventListener("resize", updateWidth);
   }, []);
-//======================================================================================================================================================================================================================
+  //======================================================================================================================================================================================================================
 
   //根據路徑名稱獲取選單物件的索引
   const getMenuItemIndexFromPathname = useCallback(
@@ -167,20 +166,17 @@ function Header({ onEvent }) {
     return () => {
       window.removeEventListener("scroll", handleScroll); //移除事件監聽
     };
-  }, [getMenuItemIndexFromPathname, location.pathname, menuItems, onEvent]);
+  },[location.pathname]);
 
   //----------------------------------------------------------------------------------------------------------------
 
   //根據URL(重新整理時)切換滑塊的位置和選單文字顏色，並切換header背景顏色
   useLayoutEffect(() => {
     const newPosition = getMenuItemIndexFromPathname(location.pathname); //根據URL位置回傳菜單物件對應的ID
-    if (newPosition !== sliderPosition) {
-      updateSliderAndMenu(newPosition); //更新滑塊位置、移除過渡動畫、更新選單文字顏色
-      setContainerColor(menuItems[newPosition].containerColor); //更新header背景顏色
-    }
-
-  }, [getMenuItemIndexFromPathname, updateSliderAndMenu, sliderPosition, location.pathname, menuItems]);
-  /*[location.pathname,....] 是作為 useLayoutEffect 鉤子的第二個參數，用來指定 useLayoutEffect 鉤子的依賴項。當這些依賴項(location.pathname,....)中的任何一個發生變化時，useLayoutEffect 中的回調函數就會被執行。*/
+    updateSliderAndMenu(newPosition); //更新滑塊位置、移除過渡動畫、更新選單文字顏色
+    setContainerColor(menuItems[newPosition].containerColor); //更新header背景顏色
+  }, [location.pathname]);
+  /*[location.pathname] 是作為 useLayoutEffect 鉤子的第二個參數，用來指定 useLayoutEffect 鉤子的依賴項。當這些依賴項(location.pathname)中的任何一個發生變化時，useLayoutEffect 中的回調函數就會被執行。*/
 
   //======================================================================================================================================================================================================================
   return (
@@ -191,8 +187,8 @@ function Header({ onEvent }) {
         </Link>
       </div>
       <div className="menu-layer-container">
-        <div className="menu-layer-bg" style={{ width: menuLayerBg }}>
-          <CursorFollow props={{memenuContainerWidth:menuContainerWidth }} />
+        <div className="menu-layer-bg" style={{ width: menuLayerBgWidth }}>
+          <CursorFollow props={{ memenuContainerWidth: menuContainerWidth, memenuLayerBgWidth: menuLayerBgWidth }} />
           <ul className="menu-layer" onMouseLeave={() => handleEvent(sliderPosition, "mouseLeave")}>
             {menuItems.map((item) => (
               <li key={item.ID} className="menu-item" onMouseEnter={() => handleEvent(item.ID, "mouseEnter")}>
@@ -254,9 +250,9 @@ function handleMouseLeave() {
     setTransition(".225s all ease-out");
     //moveSlider(sliderPosition)
 };*/
-
+/*
 //根據URL更新header背景顏色
-/*const updateContainerColor = useCallback((pathname) => {
+const updateContainerColor = useCallback((pathname) => {
   switch (pathname) {
     case "/side-project1":
       setContainerColor("red");

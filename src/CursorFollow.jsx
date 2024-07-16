@@ -1,26 +1,28 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { CursorContext } from "./CursorContext";
 
 function CursorFollow({ props }) {
-  //會跟隨鼠標的 紅點元素預設值
-  const [defaultStyle, setDefaultStyle] = useState({ width: "40px", height: "40px", scale: 1 });
-  // 初始化紅點位置為視窗左上角
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  //使用 useRef 來保存滑鼠軌跡
-  const trail = useRef([]);
+  //這個是可以共享的狀態
+  const { state, dispatch } = useContext(CursorContext);
+  //這個是拿來使用的共享狀態
+  const { position, leftPosition, defaultStyle, filter ,alpha} = state;
 
-  //將容器置中到headr.jsx
+  const trail = useRef([]);
+  //將容器置中到headr.jsx----------------------------------------------------------------------------------------------------
   const cursorContainerRef = useRef(null);
   const [cursorContainerWidth, setcursorContainerWidth] = useState(0);
-  const [leftPosition, setLeftPosition] = useState(0);
+  // const [leftPosition, setLeftPosition] = useState(0);
   const calculateCenterPosition = () => {
     if (cursorContainerRef.current) {
       setcursorContainerWidth(cursorContainerRef.current.offsetWidth);
-      setLeftPosition((props.memenuContainerWidth - cursorContainerWidth) / 2);
+      // setLeftPosition((props.memenuContainerWidth - cursorContainerWidth) / 2);
+      dispatch({ type: "SET_LEFT_POSITION", payload: (props.memenuContainerWidth - cursorContainerWidth) / 2 });
     }
   };
+  // 当header.js的container因為畫面大小改變時重新計算
   useEffect(() => {
     calculateCenterPosition();
-  }, [props.memenuContainerWidth]); // 当header.js的container因為畫面大小改變實時重新計算
+  }, [props.memenuContainerWidth]);
 
   //紀錄滑鼠軌跡的函式-------------------------------------------------------------------------------------------------------
   useEffect(() => {
@@ -38,13 +40,14 @@ function CursorFollow({ props }) {
     };
   }, []); // 空依賴性陣列，確保 useEffect 只在組件掛載和卸載時執行
 
-  //更新位置的函數---------------------------------------------------------------------------------------------------------
+  //更新位置的函數-----------------------------------------------------------------------------------------------------------
   useEffect(() => {
     function updatePosition() {
       if (trail.current.length > 0) {
         const nextPosition = trail.current[0]; // 取得當前索引處的軌跡點作為下一個位置
         trail.current = trail.current.slice(1); // 刪除已使用的軌跡點
-        setPosition(nextPosition); // 更新紅點的位置為下一個軌跡點
+        // setPosition(nextPosition); // 更新紅點的位置為下一個軌跡點
+        dispatch({ type: "SET_POSITION", payload: nextPosition });
       }
     }
 
@@ -52,20 +55,19 @@ function CursorFollow({ props }) {
     return () => {
       clearInterval(intervalId);
     };
-  }, [trail]);
+  }, []); // 空依賴性陣列，確保 useEffect 只在組件掛載和卸載時執行
 
-  //修改 scale 的值的函數
+  //修改 scale 的值的函數----------------------------------------------------------------------------------------------------
   /* eslint-disable-next-line no-unused-vars*/
   function updateScale(newScale) {
-    setDefaultStyle((prevStyle) => ({
-      ...prevStyle,
-      scale: newScale,
-    }));
+    dispatch({ type: "SET_SCALE", payload: newScale });
   }
 
+  //元素樣式設定-------------------------------------------------------------------------------------------------------------
   const CursorContainer = {
     zIndex: -1,
     left: leftPosition,
+    width: props.memenuLayerBgWidth,
   };
   const circleStyle = {
     position: "fixed",
@@ -77,11 +79,11 @@ function CursorFollow({ props }) {
     transition: "0.15s ease-out",
     transformOrigin: "center",
     transform: `matrix(${defaultStyle.scale}, 0, 0, ${defaultStyle.scale}, ${position.x}, ${position.y})`,
-    backgroundColor: "#0d2b14",
+    backgroundColor: `rgba(13, 43, 20, ${alpha})`,
   };
   const Fusion_target = {
     position: "absolute",
-    width: "calc(var(--menu-width) * 6)",
+    width: "100%",
     height: "var(--menu-bg-height)",
     top: "0",
     left: "0",
@@ -97,7 +99,7 @@ function CursorFollow({ props }) {
       <div id="Fusion_target" style={Fusion_target} ref={cursorContainerRef}></div>
       <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
         <defs>
-          <filter id="gooey">
+          <filter id={filter}>
             <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
             <feColorMatrix
               in="blur"

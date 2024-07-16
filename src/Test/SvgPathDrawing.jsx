@@ -1,6 +1,8 @@
 import BezierCurve from "./BezierCurve";
 import BezierMotion from "./BezierMotion";
 import SvgAnimation from "./SvgAnimation";
+import BlobAnimation from "./BlobAnimation";
+import Cat from "../Cat";
 
 function SvgPathDrawing() {
   return (
@@ -31,6 +33,8 @@ function SvgPathDrawing() {
       <BezierMotion />
       <BezierCurve />
       <SvgAnimation />
+      <BlobAnimation />
+      <Cat></Cat>
     </>
   );
 }

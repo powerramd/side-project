@@ -37,7 +37,6 @@ const BezierCurve = () => {
       {curvePoints.map((point, index) => (
         <circle key={index} cx={point.x} cy={point.y} r="2" fill="red" />
       ))}
-      <div>111</div>
     </svg>
     
   );

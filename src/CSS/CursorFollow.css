@@ -1,11 +1,9 @@
 .Cursor_container {
-  position:fixed;
-  top:calc( var(--menu-height)/5);
-  width: 100%;
+  position: fixed;
+  top: calc(var(--menu-height) / 5);
   pointer-events: none;
 }
 
 .gooey {
   filter: url(#gooey);
 }
-
