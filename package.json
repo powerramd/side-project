@@ -29,12 +29,12 @@
     ]
   },
   "prettier": {
-  "singleQuote": false,
-  "trailingComma": "es5",
-  "tabWidth": 2,
-  "semi": true,
-  "useTabs": false,
-  "printWidth": 200
+    "singleQuote": false,
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": true,
+    "useTabs": false,
+    "printWidth": 200
   },
   "browserslist": {
     "production": [
@@ -49,6 +49,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "gh-pages": "^6.1.1",
     "prettier": "3.3.2"
   }

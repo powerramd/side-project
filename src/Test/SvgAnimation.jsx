@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 
 function SvgAnimation() {
-  const [forTest, setForTest] = useState(null);
+  const [forTest] = useState(null);
   const [forTest2, setForTest2] = useState(null);
   const [forTest3, setForTest3] = useState(null);
   //會跟隨鼠標的svg預設座標
@@ -22,23 +22,7 @@ function SvgAnimation() {
     "rgba(51, 255, 166, 0.3)",
   ];
   //svg預設控制點
-  const defaultControlPoints = {
-    P12: { x: 49, y: 10.969 },
-    P1: { x: 49, y: 24.5 },
-    P2: { x: 49, y: 38.031 },
 
-    P3: { x: 38.031, y: 49 },
-    P4: { x: 24.5, y: 49 },
-    P5: { x: 10.969, y: 49 },
-
-    P6: { x: 0, y: 38.031 },
-    P7: { x: 0, y: 24.5 },
-    P8: { x: 0, y: 10.969 },
-
-    P9: { x: 10.969, y: 0 },
-    P10: { x: 24.5, y: 0 },
-    P11: { x: 38.031, y: 0 },
-  };
   //svg控制點
   const [controlPoints, setControlPoints] = useState({
     P12: { x: 49, y: 10.969 },
@@ -105,6 +89,23 @@ function SvgAnimation() {
 
   // 更新控制點
   const updateSvgShape = useCallback((variable, stage) => {
+    const defaultControlPoints = {
+      P12: { x: 49, y: 10.969 },
+      P1: { x: 49, y: 24.5 },
+      P2: { x: 49, y: 38.031 },
+
+      P3: { x: 38.031, y: 49 },
+      P4: { x: 24.5, y: 49 },
+      P5: { x: 10.969, y: 49 },
+
+      P6: { x: 0, y: 38.031 },
+      P7: { x: 0, y: 24.5 },
+      P8: { x: 0, y: 10.969 },
+
+      P9: { x: 10.969, y: 0 },
+      P10: { x: 24.5, y: 0 },
+      P11: { x: 38.031, y: 0 },
+    };
     const updataStage = [
       {
         P10y: (defaultControlPoints.P10.y + variable) * -2,

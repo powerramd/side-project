@@ -5,7 +5,7 @@ import CursorFollow from "./CursorFollow.jsx";
 // /*import Logo from "./picture/logo.png";
 // import User from "./picture/user.png";*/
 
-function Header({ onEvent }) {
+function Header() {
   //獲取當前URL的位置，useLocation()是react-router-dom的一個hook，包括 pathname、search、hash、state 等屬性。
   const location = useLocation();
   //設置滑塊動畫過度的初始值
@@ -113,7 +113,7 @@ function Header({ onEvent }) {
         color: index === position ? "black" : "white",
       }))
     ); // 更新選單文字顏色
-  }, []);
+  },[]);
 
   /*將 handleClick、handleMouseEnter 和 handleMouseLeave 三個函數合併為 handleSliderEvent 函數，並根據事件的類型來執行相應的操作*/
   const handleEvent = useCallback(
@@ -152,6 +152,7 @@ function Header({ onEvent }) {
   useEffect(() => {
     //這段函數是垂直滾動的時候將header的背景顏色變成毛玻璃樣式
     function handleScroll() {
+      
       if (window.scrollY > 80) {
         //當垂直滾動條滾動大於80的時候結果為true
         setContainerClass("scrolling"); //切換成毛玻璃的效果
@@ -161,12 +162,11 @@ function Header({ onEvent }) {
         setContainerColor(menuItems[getMenuItemIndexFromPathname(location.pathname)].containerColor); //更新header背景顏色
       }
     }
-
     window.addEventListener("scroll", handleScroll); //新增事件監聽器，垂直滾動的時候觸發上方函數
     return () => {
       window.removeEventListener("scroll", handleScroll); //移除事件監聽
     };
-  },[location.pathname]);
+  },[getMenuItemIndexFromPathname, location.pathname, menuItems]);
 
   //----------------------------------------------------------------------------------------------------------------
 
@@ -175,6 +175,7 @@ function Header({ onEvent }) {
     const newPosition = getMenuItemIndexFromPathname(location.pathname); //根據URL位置回傳菜單物件對應的ID
     updateSliderAndMenu(newPosition); //更新滑塊位置、移除過渡動畫、更新選單文字顏色
     setContainerColor(menuItems[newPosition].containerColor); //更新header背景顏色
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
   /*[location.pathname] 是作為 useLayoutEffect 鉤子的第二個參數，用來指定 useLayoutEffect 鉤子的依賴項。當這些依賴項(location.pathname)中的任何一個發生變化時，useLayoutEffect 中的回調函數就會被執行。*/
 

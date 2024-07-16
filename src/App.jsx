@@ -4,7 +4,6 @@ import FrontPage from "./front_page";
 import SvgPathDrawing from "./Test/SvgPathDrawing";
 import Test from "./Test/Test";
 import HorizontalScroll from "./HorizontalScroll";
-import BlobAnimation from "./Test/BlobAnimation";
 import { CursorProvider } from "./CursorContext.jsx";
 
 function App() {
@@ -17,7 +16,7 @@ function App() {
           <Route path="/side-project1" exact element={<HorizontalScroll />}></Route>
           <Route path="/side-project2" exact element={<SvgPathDrawing />}></Route>
           <Route path="/side-project3" exact element={<Test />}></Route>
-          <Route path="/side-project4" exact element={<BlobAnimation />}></Route>
+          <Route path="/side-project4" exact element={<p>123</p>}></Route>
           <Route path="/side-project5" exact element={<p>123</p>}></Route>
           <Route path="/login" exact element={<p>login</p>}></Route>
         </Routes>

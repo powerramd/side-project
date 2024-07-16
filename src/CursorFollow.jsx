@@ -5,24 +5,24 @@ function CursorFollow({ props }) {
   //這個是可以共享的狀態
   const { state, dispatch } = useContext(CursorContext);
   //這個是拿來使用的共享狀態
-  const { position, leftPosition, defaultStyle, filter ,alpha} = state;
+  const { position, leftPosition, defaultStyle, filter, alpha } = state;
 
   const trail = useRef([]);
   //將容器置中到headr.jsx----------------------------------------------------------------------------------------------------
   const cursorContainerRef = useRef(null);
   const [cursorContainerWidth, setcursorContainerWidth] = useState(0);
   // const [leftPosition, setLeftPosition] = useState(0);
-  const calculateCenterPosition = () => {
-    if (cursorContainerRef.current) {
-      setcursorContainerWidth(cursorContainerRef.current.offsetWidth);
-      // setLeftPosition((props.memenuContainerWidth - cursorContainerWidth) / 2);
-      dispatch({ type: "SET_LEFT_POSITION", payload: (props.memenuContainerWidth - cursorContainerWidth) / 2 });
-    }
-  };
+
   // 当header.js的container因為畫面大小改變時重新計算
   useEffect(() => {
+    const calculateCenterPosition = () => {
+      if (cursorContainerRef.current) {
+        setcursorContainerWidth(cursorContainerRef.current.offsetWidth);
+        dispatch({ type: "SET_LEFT_POSITION", payload: (props.memenuContainerWidth - cursorContainerWidth) / 2 });
+      }
+    };
     calculateCenterPosition();
-  }, [props.memenuContainerWidth]);
+  }, [props.memenuContainerWidth, dispatch, cursorContainerWidth]);
 
   //紀錄滑鼠軌跡的函式-------------------------------------------------------------------------------------------------------
   useEffect(() => {
@@ -55,7 +55,7 @@ function CursorFollow({ props }) {
     return () => {
       clearInterval(intervalId);
     };
-  }, []); // 空依賴性陣列，確保 useEffect 只在組件掛載和卸載時執行
+  }, [dispatch]); // 空依賴性陣列，確保 useEffect 只在組件掛載和卸載時執行
 
   //修改 scale 的值的函數----------------------------------------------------------------------------------------------------
   /* eslint-disable-next-line no-unused-vars*/

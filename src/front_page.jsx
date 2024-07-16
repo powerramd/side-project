@@ -4,7 +4,7 @@ import { CursorContext } from "./CursorContext";
 
 function FrontPage() {
   //這個是CursorFollow.jsx的共享狀態
-  const { state, dispatch } = useContext(CursorContext);
+  const { dispatch } = useContext(CursorContext);
 
   function handleMouseEnter() {
     dispatch({ type: "SET_SCALE", payload: 2 });

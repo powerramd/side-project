@@ -1,15 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 
-
 const BezierMotion = () => {
   const canvasRef = useRef(null);
   const [time, setTime] = useState(0);
-
-  // 貝茲曲線控制點
-  const p0 = { x: 50, y: 200 };
-  const p1 = { x: 150, y: 50 };
-  const p2 = { x: 250, y: 350 };
-  const p3 = { x: 350, y: 200 };
 
   // 計算貝茲曲線上的點
   const cubicBezier = (t, p0, p1, p2, p3) => {
@@ -28,6 +21,11 @@ const BezierMotion = () => {
   };
 
   useEffect(() => {
+    // 貝茲曲線控制點
+    const p0 = { x: 50, y: 200 };
+    const p1 = { x: 150, y: 50 };
+    const p2 = { x: 250, y: 350 };
+    const p3 = { x: 350, y: 200 };
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 

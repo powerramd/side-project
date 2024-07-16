@@ -6,7 +6,6 @@ import "./CSS/HorizontalScroll.css";
 import "./CSS/CursorFollow.css";
 import "./Test/Css/Test.css";
 
-
 import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

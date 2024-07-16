@@ -28,7 +28,7 @@ function Cat() {
     //畢達哥拉斯定理計算眼睛到滑鼠的直線距離
     const distance = Math.sqrt(dx * dx + dy * dy);
     // 最大移動距離
-    const maxDistance = 5;
+    const maxDistance = 6;
     //計算移動比例，如果距離小於或等於 maxDistance，ratio 為 1，如果距離大於 maxDistance，ratio 將小於 1
     const ratio = Math.min(maxDistance / distance, 1);
 
@@ -39,8 +39,8 @@ function Cat() {
     };
   };
 
-  const rightPupil = calculateEyePosition(175, 190, mousePosition.x, mousePosition.y);
-  const leftPupil = calculateEyePosition(232, 190, mousePosition.x, mousePosition.y);
+  const rightPupil = calculateEyePosition(175.414, 190.691, mousePosition.x, mousePosition.y);
+  const leftPupil = calculateEyePosition(232.851, 190.691, mousePosition.x, mousePosition.y);
 
   return (
     <svg ref={svgRef} className="introduce-cat" width="478" height="478" viewBox="0 0 478 478" fill="none" xmlns="http://www.w3.org/2000/svg">

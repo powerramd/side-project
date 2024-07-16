@@ -8,25 +8,24 @@ const BezierCurve = () => {
   const P3 = { x: 137.5, y: 1 };
   const d = `M${P0.x} ${P0.y} C${P1.x} ${P1.y}, ${P2.x} ${P2.y}, ${P3.x} ${P3.y}`;
 
-  // 計算貝塞爾曲線上的點
-  const calculateCurvePoints = () => {
-    const points = [];
-    const numPoints = 10; // 可以根據需要調整採樣點的數量
-
-    for (let i = 0; i <= numPoints; i++) {
-      const t = i / numPoints;
-      const x = Math.pow(1 - t, 3) * P0.x + 3 * Math.pow(1 - t, 2) * t * P1.x + 3 * (1 - t) * Math.pow(t, 2) * P2.x + Math.pow(t, 3) * P3.x;
-      const y = Math.pow(1 - t, 3) * P0.y + 3 * Math.pow(1 - t, 2) * t * P1.y + 3 * (1 - t) * Math.pow(t, 2) * P2.y + Math.pow(t, 3) * P3.y;
-      points.push({ x, y });
-    }
-
-    return points;
-  };
-
   useEffect(() => {
+    // 計算貝塞爾曲線上的點
+    const calculateCurvePoints = () => {
+      const points = [];
+      const numPoints = 10; // 可以根據需要調整採樣點的數量
+
+      for (let i = 0; i <= numPoints; i++) {
+        const t = i / numPoints;
+        const x = Math.pow(1 - t, 3) * P0.x + 3 * Math.pow(1 - t, 2) * t * P1.x + 3 * (1 - t) * Math.pow(t, 2) * P2.x + Math.pow(t, 3) * P3.x;
+        const y = Math.pow(1 - t, 3) * P0.y + 3 * Math.pow(1 - t, 2) * t * P1.y + 3 * (1 - t) * Math.pow(t, 2) * P2.y + Math.pow(t, 3) * P3.y;
+        points.push({ x, y });
+      }
+
+      return points;
+    };
     const points = calculateCurvePoints();
     setCurvePoints(points);
-  }, []);
+  }, [P0.x, P0.y, P1.x, P1.y, P2.x, P2.y, P3.x, P3.y]);
 
   return (
     <svg width="300" height="150" viewBox="0 0 300 150">
@@ -38,9 +37,7 @@ const BezierCurve = () => {
         <circle key={index} cx={point.x} cy={point.y} r="2" fill="red" />
       ))}
     </svg>
-    
   );
 };
 
 export default BezierCurve;
-
