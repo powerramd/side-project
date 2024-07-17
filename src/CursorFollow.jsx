@@ -28,7 +28,7 @@ function CursorFollow({ props }) {
   useEffect(() => {
     function handleMouseMove(event) {
       const { clientX, clientY } = event; // 從事件對象中獲取滑鼠的客戶端坐標
-      trail.current = [...trail.current, { x: clientX, y: clientY }].slice(-200); // 只保留最新的 200 個位置
+      trail.current = [...trail.current, { x: clientX, y: clientY }].slice(-50); // 只保留最新的 200 個位置
     }
 
     // 設置滑鼠移動事件監聽器和定時器來更新位置

@@ -5,6 +5,8 @@ import SvgPathDrawing from "./Test/SvgPathDrawing";
 import Test from "./Test/Test";
 import HorizontalScroll from "./HorizontalScroll";
 import { CursorProvider } from "./CursorContext.jsx";
+import InfiniteCarousel from "./Test/InfiniteCarousel.jsx";
+
 
 function App() {
   return (
@@ -16,7 +18,7 @@ function App() {
           <Route path="/side-project1" exact element={<HorizontalScroll />}></Route>
           <Route path="/side-project2" exact element={<SvgPathDrawing />}></Route>
           <Route path="/side-project3" exact element={<Test />}></Route>
-          <Route path="/side-project4" exact element={<p>123</p>}></Route>
+          <Route path="/side-project4" exact element={<InfiniteCarousel />}></Route>
           <Route path="/side-project5" exact element={<p>123</p>}></Route>
           <Route path="/login" exact element={<p>login</p>}></Route>
         </Routes>

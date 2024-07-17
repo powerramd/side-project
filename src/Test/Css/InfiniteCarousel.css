@@ -1,0 +1,42 @@
+.carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px; /* 設定透視效果，使3D變換看起來更真實 */
+  margin: 0 auto;
+  width: 300px;
+}
+
+.carousel-view {
+  width: 300px;
+  height: 200px;
+  position: relative;
+  perspective: 1000px; /* 再次設定透視效果 */
+  transform-style: preserve-3d; /* 保留3D變換效果 */
+}
+
+.carousel-rotator {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d; /* 保留3D變換效果 */
+}
+
+.carousel-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* 隱藏背面以避免反面顯示 */
+}
+
+.carousel-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 使圖片保持比例並填滿容器 */
+}
+
+button {
+  margin: 0 10px;
+  padding: 5px 10px;
+  font-size: 16px;
+}
