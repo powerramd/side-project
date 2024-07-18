@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-function Marquee() {
+function Marquee({ speed = 1.3 }) {
   // 跑馬燈移動的值
   const [carouselTransform, setCarouselTransform] = useState(0);
   const [carousel2Transform, setCarousel2Transform] = useState(0);
@@ -15,7 +15,7 @@ function Marquee() {
   const [carousel2StyleLeft, setCarousel2StyleLeft] = useState(0);
   //用來設定卡片大小
   const [figure, setFigure] = useState(0);
-  const cardItmes = 5;
+  const cardItems = 5;
 
   // 控制是否正在調整大小的狀態
 
@@ -30,7 +30,7 @@ function Marquee() {
         //加這兩個可以防止畫面大小改變的時候跑掉
         setCarouselTransform(0);
         setCarousel2Transform(0);
-        setFigure(marqueeRef.current.offsetWidth / cardItmes);
+        setFigure(marqueeRef.current.offsetWidth / cardItems);
       }
     };
 
@@ -47,29 +47,58 @@ function Marquee() {
   useEffect(() => {
     const interval = setInterval(() => {
       if (carouselTransform > itemWidth) {
-        // 1.5是調整的係數，我不知道為什麼連接處會小小的誤差，導致雖然不是很明顯但會有斷開的感覺，可能是因為有浮點數計算的關係?
+        // 1.5是調整的係數，連接處會小小的誤差，導致雖然不是很明顯但會有斷開的感覺，可能是因為執行順序的關係?
         setCarouselTransform(0 - carouselRef.current.offsetWidth + 1.5);
       }
-      setCarouselTransform((prev) => prev + 1);
-
-      if (carousel2Transform / 2 > itemWidth) {
-        setCarousel2Transform(0 + 1.5);
-      }
-      setCarousel2Transform((prev) => prev + 1);
-    }, 5); // 每隔 5 豪秒切換一次
+      setCarouselTransform((prev) => prev + speed);
+    }, 4); // 每隔 5 豪秒切換一次
 
     // 清除 interval，避免內存洩漏
     return () => clearInterval(interval);
-  }, [carousel2Transform, carouselTransform, itemWidth]);
+  }, [carousel2Transform, carouselTransform, itemWidth, speed]);
 
-  const carouselStyle = { transform: `matrix(${1}, 0, 0, ${1}, ${carouselTransform}, ${0})`, left: `${carouselStyleLeft}px` };
-  const carousel2Style = { transform: `matrix(${1}, 0, 0, ${1}, ${carousel2Transform}, ${0})`, left: `${carousel2StyleLeft}px` };
-  const figureStyle = { height: `calc(${figure}px - 2em)`, width: `${figure}px ` };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (carousel2Transform / 2 > itemWidth) {
+        setCarousel2Transform(0 + 1.5);
+      }
+      setCarousel2Transform((prev) => prev + +speed);
+    }, 4);
+    // 清除 interval，避免內存洩漏
+    return () => clearInterval(interval);
+  }, [carousel2Transform, itemWidth, speed]);
 
+  const carouselStyle = useMemo(
+    () => ({
+      transform: `matrix(${1}, 0, 0, ${1}, ${Math.round(carouselTransform)}, ${0})`,
+      left: `${carouselStyleLeft}px`,
+    }),
+    [carouselTransform, carouselStyleLeft]
+  );
+
+  const carousel2Style = useMemo(
+    () => ({
+      transform: `matrix(${1}, 0, 0, ${1}, ${Math.round(carousel2Transform)}, ${0})`,
+      left: `${carousel2StyleLeft}px`,
+    }),
+    [carousel2Transform, carousel2StyleLeft]
+  );
+
+  const figureStyle = useMemo(
+    () => ({
+      height: `calc(${figure}px - 2em)`,
+      width: `${figure}px`,
+    }),
+    [figure]
+  );
   // 使用 .map() 生成 figure 元素
-  const figures = Array(cardItmes)
-    .fill()
-    .map((_, index) => <figure key={index} style={figureStyle} className="figure-style"></figure>);
+  const figures = useMemo(
+    () =>
+      Array(cardItems)
+        .fill()
+        .map((_, index) => <figure key={index} style={figureStyle} className="figure-style"></figure>),
+    [cardItems, figureStyle]
+  );
 
   return (
     <div ref={marqueeRef} className="show-product-continer">
