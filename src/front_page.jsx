@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext } from "react";
 import Cat from "./Cat";
 import Marquee from "./Marquee";
 import { CursorContext } from "./CursorContext";
@@ -6,7 +6,6 @@ import { CursorContext } from "./CursorContext";
 function FrontPage() {
   //這個是CursorFollow.jsx的共享狀態
   const { dispatch } = useContext(CursorContext);
-
 
   function handleMouseEnter() {
     dispatch({ type: "SET_SCALE", payload: 2 });
@@ -18,9 +17,6 @@ function FrontPage() {
     dispatch({ type: "SET_SCALE", payload: 1 });
     dispatch({ type: "SET_ALPHA", payload: 1 });
   }
-
-
-
 
   return (
     <>
@@ -42,7 +38,7 @@ function FrontPage() {
           </figure>
         </section>
         <section className="show-product">
-            <Marquee></Marquee>
+          <Marquee></Marquee>
         </section>
       </main>
       <footer></footer>
