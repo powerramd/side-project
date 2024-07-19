@@ -46,9 +46,9 @@
   align-items: center;
   width: 100%;
   height: calc(100vh - 80px);
-  background: rgba(56, 90, 66, 1);
+  background: rgba(245, 180, 28, 1);
+  overflow: hidden;
 }
-
 
 /* .Grid-row-wrapper :nth-child(6){
     color: black;
