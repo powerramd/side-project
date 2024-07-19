@@ -4,7 +4,7 @@
   --menu-bg-height: 3em;
 }
 
-*{
+* {
   margin: 0;
 }
 body {
@@ -12,6 +12,7 @@ body {
   position: relative;
   width: 100%;
   overflow-x: hidden;
+  justify-content: center;
 }
 
 /*-----------------------------------------------------------*/
@@ -36,6 +37,7 @@ body {
   /* 以下這三個是將導航菜單容器釘選在最上方 */
   position: sticky;
   top: 0px;
+
   z-index: 1;
 }
 
@@ -47,7 +49,6 @@ body {
   flex-wrap: wrap; /*當容器空間不足以容納所有的 flex 元素時，設置 flex-wrap: wrap; 可以使 flex 元素換行顯示*/
   justify-content: center;
   align-items: center;
-  
 }
 
 /*-----------------------------------------------------------*/

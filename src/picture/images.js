@@ -2,5 +2,6 @@
 import Logo from "./logo.png";
 import User from "./user.png";
 import pendant1 from "./pendant1.jpg";
+import sticker from "./sticker.svg"
 
-export { Logo, User ,pendant1};
+export { sticker,Logo, User ,pendant1};

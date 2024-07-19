@@ -38,42 +38,57 @@ function Cat() {
       cy: eyeY + dy * ratio,
     };
   };
+  // 滾動螢幕貓咪旋轉效果
+  const [svgRotate, setSvgRotate] = useState(51);
+  useEffect(() => {
+    function scrollRotate() {
+      const scrollY = window.scrollY;
+      setSvgRotate(scrollY * 0.5);
+    }
+    window.addEventListener("scroll", scrollRotate);
+    return () => {
+      window.removeEventListener("scroll", scrollRotate);
+    };
+  }, []);
 
   const rightPupil = calculateEyePosition(175.414, 190.691, mousePosition.x, mousePosition.y);
   const leftPupil = calculateEyePosition(232.851, 190.691, mousePosition.x, mousePosition.y);
+  const svgRotateStyle = { transform: `rotate(${svgRotate}deg)` };
 
   return (
-    <svg ref={svgRef} className="introduce-cat" width="478" height="478" viewBox="0 0 478 478" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* 背景 */}
-      <circle cx="239" cy="239" r="239" fill="#E09E4A" />
+    <div className="cat-continer">
+      <svg ref={svgRef} style={svgRotateStyle} className="introduce-cat" width="478" height="478" viewBox="0 0 478 478" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* 背景 */}
+        <circle cx="239" cy="239" r="239" fill="#E09E4A" />
 
-      {/* 身體 */}
-      <path
-        d="M342.106 239.667C342.106 270.1 329.277 293.139 308.536 308.585C287.78 324.043 259.068 331.917 227.303 331.917C195.538 331.917 166.827 324.043 146.07 308.585C125.33 293.139 112.5 270.1 112.5 239.667C112.5 209.232 125.332 185.761 146.075 169.886C166.833 153.999 195.544 145.699 227.303 145.699C259.063 145.699 287.773 153.999 308.531 169.886C329.275 185.761 342.106 209.232 342.106 239.667Z"
-        fill="black"
-      />
+        {/* 身體 */}
+        <path
+          d="M342.106 239.667C342.106 270.1 329.277 293.139 308.536 308.585C287.78 324.043 259.068 331.917 227.303 331.917C195.538 331.917 166.827 324.043 146.07 308.585C125.33 293.139 112.5 270.1 112.5 239.667C112.5 209.232 125.332 185.761 146.075 169.886C166.833 153.999 195.544 145.699 227.303 145.699C259.063 145.699 287.773 153.999 308.531 169.886C329.275 185.761 342.106 209.232 342.106 239.667Z"
+          fill="black"
+        />
 
-      {/* 右眼 */}
-      <circle cx="175.414" cy="190.691" r="19.7278" fill="white" />
-      <circle cx={rightPupil.cx} cy={rightPupil.cy} r="13.5501" fill="black" />
-      {/* 左眼 */}
-      <circle cx="232.851" cy="190.691" r="19.6927" fill="white" />
-      <circle cx={leftPupil.cx} cy={leftPupil.cy} r="13.5501" fill="black" />
+        {/* 右眼 */}
+        <circle cx="175.414" cy="190.691" r="19.7278" fill="white" />
+        <circle cx={rightPupil.cx} cy={rightPupil.cy} r="13.5501" fill="black" />
+        {/* 左眼 */}
+        <circle cx="232.851" cy="190.691" r="19.6927" fill="white" />
+        <circle cx={leftPupil.cx} cy={leftPupil.cy} r="13.5501" fill="black" />
 
-      {/* 尾巴 */}
-      <rect x="219.159" y="297.206" width="185.171" height="35.2107" rx="17.6053" fill="black" />
+        {/* 尾巴 */}
+        <rect x="219.159" y="297.206" width="185.171" height="35.2107" rx="17.6053" fill="black" />
 
-      {/* 右耳 */}
-      <path
-        d="M156.6 141.834C157.049 136.716 162.666 133.803 167.097 136.39L186.057 147.461C190.818 150.242 190.64 157.191 185.742 159.731L164.859 170.56C159.961 173.1 154.194 169.234 154.677 163.733L156.6 141.834Z"
-        fill="black"
-      />
-      {/* 左耳 */}
-      <path
-        d="M236.256 129.426C239.778 125.69 245.992 126.896 247.866 131.68L255.883 152.145C257.896 157.284 253.452 162.62 248.036 161.568L224.951 157.086C219.535 156.035 217.404 149.422 221.187 145.409L236.256 129.426Z"
-        fill="black"
-      />
-    </svg>
+        {/* 右耳 */}
+        <path
+          d="M156.6 141.834C157.049 136.716 162.666 133.803 167.097 136.39L186.057 147.461C190.818 150.242 190.64 157.191 185.742 159.731L164.859 170.56C159.961 173.1 154.194 169.234 154.677 163.733L156.6 141.834Z"
+          fill="black"
+        />
+        {/* 左耳 */}
+        <path
+          d="M236.256 129.426C239.778 125.69 245.992 126.896 247.866 131.68L255.883 152.145C257.896 157.284 253.452 162.62 248.036 161.568L224.951 157.086C219.535 156.035 217.404 149.422 221.187 145.409L236.256 129.426Z"
+          fill="black"
+        />
+      </svg>
+    </div>
   );
 }
 
