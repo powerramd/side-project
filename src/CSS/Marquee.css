@@ -27,7 +27,7 @@
 .show-product-marquee-2 {
   display: flex;
   position: absolute;
-  min-width: 100%;
+  min-width: 100.5%;
   height: 80%;
   background-color: rgba(245, 180, 28, 1);
 background-color: blue;
@@ -39,39 +39,39 @@ background-color: blue;
   border-radius: 32px;
 }
 
-@keyframes marquee {
+@keyframes marquee1-1 {
   0% {
-    transform: translateX(var(--reset-position));
+    transform: translateX(var(0));
   }
   100% {
-    transform: translateX(var(--show-product-container-width));
+    transform: translateX(var(--last-move));
   }
 }
-@keyframes marquee3 {
+@keyframes marquee1-2 {
   0% {
-    transform: translateX(var(--reset-position));
+    transform: translateX(var(--first-move));
   }
   100% {
-    transform: translateX(var(--show-product-container-width));
+    transform: translateX(var(--last-move));
   }
 }
 
-@keyframes marquee2 {
+@keyframes marquee2-1 {
   0% {
-    transform: translateX(var(--reset-position2));
+    transform: translateX(0);
   }
   100% {
-    transform: translateX(var(--show-product-container-width2));
+    transform: translateX(var(--last-move2));
   }
   
 }
 
-@keyframes marquee4 {
+@keyframes marquee2-2 {
   0% {
-    transform: translateX(var(--reset-position2));
+    transform: translateX(var(--first-move2));
   }
   100% {
-    transform: translateX(var(--show-product-container-width2));
+    transform: translateX(var(--last-move2));
   }
   
 }

@@ -2,161 +2,140 @@ import React, { useEffect, useMemo, useRef, useReducer, useCallback, useState } 
 import { sticker } from "./picture/images";
 import { useLocation } from "react-router-dom";
 
-// 自定義 hook 用於處理 resize 邏輯
-const useResizeEffect = (cardItems, prpos) => {
-  // 創建 refs 來引用 DOM 元素
-  const marqueeContinerRef = useRef(null);
-  const marqueeRef = useRef(null);
-  const marquee2Ref = useRef(null);
-
-  // 使用 useReducer 來管理複雜的狀態
-  const [state, dispatch] = useReducer(
-    (state, action) => {
-      switch (action.type) {
-        case "RESIZE":
-          return { ...state, ...action.payload };
-        case "SET_MARQUEE_TRANSFORM_2":
-          return { ...state, marqueeTransform2: action.payload };
-        case "SET_MARQUEE_TRANSFORM_1":
-          return { ...state, marqueeTransform: action.payload };
-        default:
-          return state;
-      }
-    },
-    {
-      continerWidth: 0, //用來放置容器寬度
-      marqueeStyleLeft: 0, //動態設定跑馬燈初始的位置
-      marquee2StyleLeft: 0, //動態設定跑馬燈初始的位置
-      marqueeTransform: 0, //根據容器寬度設定要移動的距離
-      marqueeTransform2: 0, //根據容器寬度設定要移動的距離
-      use1Ref: marqueeRef,
-      use2Ref: marquee2Ref,
-    }
-  );
-
-  // 處理視窗大小變化的效果
-  useEffect(() => {
-    const handleResize = () => {
-      if (marquee2Ref.current) {
-        const continerWidth2 = prpos.current.offsetWidth + marqueeRef.current.offsetWidth;
-        const continerWidth = prpos.current.offsetWidth;
-
-        // 當視窗大小變化時，更新所有相關的狀態
-        dispatch({
-          type: "RESIZE",
-          payload: {
-            continerWidth2,
-            continerWidth,
-            marquee2StyleLeft: 0 - marquee2Ref.current.offsetWidth,
-            marqueeStyleLeft: 0, // 暫時
-            marqueeTransform: 0,
-            marqueeTransform2: 0,
-            use1Ref: marqueeRef,
-            use2Ref: marquee2Ref,
-          },
-        });
-      }
-    };
-
-    // 初始調用一次
-    handleResize();
-   
-   
-  
-  }, [cardItems, prpos]);
-
-  return [state, marqueeContinerRef, marquee2Ref, marqueeRef, dispatch];
-};
-
 function Marquee({ prpos }) {
-  const cardItems = 5; // 設置卡片數量
+  const showContinerRef = useRef();
+  const marqueeRef = useRef();
+  const marqueeRef2 = useRef();
 
-  // 使用自定義 hook 來處理 resize 效果
-  const [{ continerWidth2, continerWidth, marqueeStyleLeft, marquee2StyleLeft, use2Ref, use1Ref }, marqueeContinerRef, marquee2Ref, marqueeRef, dispatch] =
-    useResizeEffect(cardItems, prpos);
-  const [marqueeTransform,setMarqueeTransform]= useState(0)
-  const [marqueeTransform2,setMarqueeTransform2]= useState(0)
+  // const [fatherContiner, setFatherContiner] = useState();
+  // const [showContiner, setshowContiner] = useState();
+  // const [marqueeContiner, setMarqueeContiner] = useState();
+  // const [marqueeContiner2, setMarqueeContiner2] = useState();
+  const cardItems = 5;
 
-  //獲取當前URL的位置，useLocation()是react-router-dom的一個hook，包括 pathname、search、hash、state 等屬性。
-  const location = useLocation();
-  // 控制動畫狀態的 state
-  const [switchAnimation, setSwitchAnimation] = useState("marquee");
-  const [switchAnimation2, setSwitchAnimation2] = useState("marquee2");
-  const initialTime = 6.5;
-  const [time, setTime] = useState("6.5");
-  const [time2, setTime2] = useState(`${6.5}`);
+  // 動畫名稱
+  const [animationName, setAnimationName] = useState(["marquee1-1"]);
+  const [animationName2, setAnimationName2] = useState(["marquee2-1"]);
+  // 動畫時間
+  const [initSpeed, setinitSpeed] = useState(3);
+  const [animationSpeed, setAnimationSpeed] = useState(initSpeed);
+  const [animationSpeed2, setAnimationSpeed2] = useState(initSpeed);
+  // 第二塊跑馬燈初始位置
+  const [marqueeLeft1, setMarqueeLeft1] = useState(0);
+  const [marqueeLeft2, setMarqueeLeft2] = useState(0);
+  // 移動的距離
+  const [fristMove, setFristMove] = useState(0);
+  const [lastMove, setLastMove] = useState(0);
+  const [fristMove2, setFristMove2] = useState(0);
+  const [lastMove2, setLastMove2] = useState(0);
+
+  // 計算速率與時間，分別丟入原始距離、初始時間、新的距離
+  function calculateNewTime(originalDistance, originalTime, newDistance) {
+    const originalSpeed = originalDistance / originalTime; // 計算原始速度
+    const newTime = newDistance / originalSpeed; // 計算新時間
+    return newTime;
+  }
+
+  // 初始化設定
   useEffect(() => {
     function init() {
-      const fatherContiner = prpos.current.offsetWidth;
-      const childContiner = use2Ref.current.offsetWidth;
-      const duration = (((childContiner + fatherContiner) / fatherContiner) * initialTime);
-      setTime2(`${duration}`);
+      if (marqueeRef.current && marqueeRef.current && marqueeRef2.current && prpos.current) {
+        const fatherContiner = prpos.current;
+        const marqueeContiner = marqueeRef.current;
+        const marqueeContiner2 = marqueeRef2.current;
+        // 計算原始速度
+        const originalDistance = fatherContiner.offsetWidth;
+        const originalTime = initSpeed;
+        setLastMove(prpos.current.offsetWidth);
+        setLastMove2(prpos.current.offsetWidth + marqueeRef2.current.offsetWidth);
 
+        // 計算新距離和新時間
+        const newDistance2 = fatherContiner.offsetWidth + marqueeContiner2.offsetWidth;
+
+        const newTime2 = calculateNewTime(originalDistance, originalTime, newDistance2);
+
+        // 將跑第二塊跑馬燈移動到左邊螢幕外
+        setMarqueeLeft2(0 - marqueeRef.current.offsetWidth);
+        // 跑馬燈速率修正速度
+        setAnimationSpeed2(newTime2);
+      }
     }
-  
-    if (prpos.current && use2Ref.current) {
-      init();
-    }
-  }, [location.pathname, prpos, use2Ref, initialTime]);
 
-  // 動畫結束後切換動畫，讓動畫初始位置設定到左邊視窗外
-  const handleAnimationEnd = useCallback(() => {
-    const fatherContiner = prpos.current.offsetWidth;
-    const childContiner = use1Ref.current.offsetWidth;
-    const animationDuration =( ((childContiner + fatherContiner+ Math.abs(fatherContiner-childContiner)) / fatherContiner ) * initialTime);
-
-    setTime(animationDuration);
-    setMarqueeTransform( 0 - (Math.abs((fatherContiner - childContiner)*2) + fatherContiner))
-    dispatch({ type: "SET_MARQUEE_TRANSFORM_1", payload: 0 - (Math.abs(fatherContiner - childContiner) + fatherContiner) });
-    setSwitchAnimation("marquee3")
-  }, [dispatch, prpos, use1Ref]);
-
-
-  const handleAnimationEnd2 = useCallback(() => {
-    const fatherContiner = prpos.current.offsetWidth;
-    const childContiner = use2Ref.current.offsetWidth;
-
-    setSwitchAnimation2("marquee4")
-    setMarqueeTransform2(- (Math.abs(fatherContiner - childContiner)))
-    dispatch({ type: "SET_MARQUEE_TRANSFORM_2", payload: 0 - (fatherContiner -childContiner)-(Math.abs(fatherContiner - childContiner) ) });
-    const animationDuration2 = (childContiner + fatherContiner+  Math.abs(fatherContiner-childContiner)) / ((childContiner + fatherContiner)/(((childContiner + fatherContiner) / fatherContiner) * initialTime));
-    setTime2(animationDuration2 );
-  }, [prpos, use2Ref, dispatch]);
-
-  // 添加動畫結束事件監聽器
-  useEffect(() => {
-    const element = use1Ref.current;
-    const element2 = use2Ref.current;
-    element?.addEventListener("animationiteration", handleAnimationEnd);
-    element2?.addEventListener("animationiteration", handleAnimationEnd2);
+    init();
+    window.addEventListener("resize", init);
     return () => {
-      element?.removeEventListener("animationiteration", handleAnimationEnd);
-      element2?.removeEventListener("animationiteration", handleAnimationEnd2);
+      window.removeEventListener("resize", init);
     };
-  }, [handleAnimationEnd, handleAnimationEnd2, use1Ref, use2Ref]);
+  }, [initSpeed, prpos]);
+
+  //動畫重播
+  useEffect(() => {
+    function handleAnimationEnd() {
+      const repeatMove = (0 - marqueeRef.current.offsetWidth) - Math.abs(prpos.current.offsetWidth - marqueeRef.current.offsetWidth);
+      setFristMove(repeatMove);
+      setAnimationName("marquee1-2");
+      setAnimationSpeed(Math.abs(calculateNewTime(prpos.current.offsetWidth, initSpeed, Math.abs(repeatMove)))+3);
+    }
+
+    const marqueeElement = marqueeRef.current;
+
+    marqueeElement?.addEventListener("animationiteration", handleAnimationEnd);
+
+    return () => {
+      marqueeElement?.removeEventListener("animationend", handleAnimationEnd);
+    };
+  }, [fristMove, initSpeed, prpos]);
+
+  useEffect(() => {
+    function handleAnimationEnd2() {
+
+
+      const repeatMove2 = (0 - marqueeRef.current.offsetWidth) - Math.abs(prpos.current.offsetWidth - marqueeRef.current.offsetWidth);
+      setLastMove2(prpos.current.offsetWidth + marqueeRef2.current.offsetWidth + Math.abs(prpos.current.offsetWidth - marqueeRef.current.offsetWidth));
+      console.log(repeatMove2);
+      setFristMove2(repeatMove2);
+      setAnimationName2("marquee2-2");
+      setinitSpeed(Math.abs(calculateNewTime(marqueeRef.current.offsetWidth, initSpeed, Math.abs(repeatMove2))))
+      
+    }
+
+    const marqueeElement2 = marqueeRef2.current;
+
+    marqueeElement2?.addEventListener("animationiteration", handleAnimationEnd2);
+
+    return () => {
+      marqueeElement2?.removeEventListener("animationend", handleAnimationEnd2);
+    };
+  }, [initSpeed, prpos]);
+
+  // 第一次移動
+  useEffect(() => {
+    setLastMove(prpos.current.offsetWidth);
+    setLastMove2(prpos.current.offsetWidth + marqueeRef2.current.offsetWidth);
+  }, [prpos]);
 
   // 第一個跑馬燈樣式
   const marqueeStyle = useMemo(
     () => ({
       transform: `matrix(1, 0, 0, 1, 0, 0)`,
-      left: `${marqueeStyleLeft}px`,
-      animation: `${switchAnimation} ${time}s infinite linear`,
-      "--show-product-container-width": `${continerWidth}px`,
-      "--reset-position": `${marqueeTransform}px`,
+      left: `${marqueeLeft1}px`,
+      animation: `${animationName} ${animationSpeed}s infinite linear`,
+      "--first-move": `${fristMove}px`,
+      "--last-move": `${lastMove}px`,
     }),
-    [marqueeStyleLeft, time, continerWidth, marqueeTransform]
+    [animationName, animationSpeed, fristMove, lastMove, marqueeLeft1]
   );
 
   // 第二個跑馬燈樣式
-  const marquee2Style = useMemo(
+  const marqueeStyle2 = useMemo(
     () => ({
       transform: `matrix(1, 0, 0, 1, 0, 0)`,
-      left: `${marquee2StyleLeft}px`,
-      animation: `${switchAnimation2} ${time2}s infinite linear`,
-      "--show-product-container-width2": `${continerWidth2}px`,
-     "--reset-position2": `${marqueeTransform2}px`,
+      left: `${marqueeLeft2}px`,
+      animation: `${animationName2} ${animationSpeed2}s infinite linear`,
+      "--first-move2": `${fristMove2}px`,
+      "--last-move2": `${lastMove2}px`,
     }),
-    [marquee2StyleLeft, switchAnimation2, time2, continerWidth2, marqueeTransform2]
+    [animationName2, animationSpeed2, fristMove2, lastMove2, marqueeLeft2]
   );
 
   // 卡片容器樣式
@@ -184,11 +163,11 @@ function Marquee({ prpos }) {
   );
 
   return (
-    <div ref={marqueeContinerRef} className="show-product-continer">
-      <div ref={marquee2Ref} style={marquee2Style} className="show-product-marquee-2">
+    <div ref={showContinerRef} className="show-product-continer">
+      <div ref={marqueeRef} style={marqueeStyle} className="show-product-marquee">
         {figures}
       </div>
-      <div ref={marqueeRef} style={marqueeStyle} className="show-product-marquee">
+      <div ref={marqueeRef2} style={marqueeStyle2} className="show-product-marquee-2">
         {figures}
       </div>
     </div>

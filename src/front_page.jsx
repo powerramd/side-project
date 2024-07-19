@@ -13,7 +13,6 @@ function FrontPage() {
       const windowHeight = window.innerHeight;
       const scrollTop = document.documentElement.scrollTop;
       const newScrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
-console.log(newScrollPercentage)
 
       if (newScrollPercentage < 10) {
         setScale(1);
