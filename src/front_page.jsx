@@ -41,7 +41,7 @@ function FrontPage() {
           </figure>
         </section>
         <section className="show-product" ref={ showProductRef}>
-          <Marquee prpos={ showProductRef}></Marquee>
+          <Marquee ></Marquee>
         </section>
       </main>
       <footer></footer>

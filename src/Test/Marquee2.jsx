@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useReducer, useCallback, useState } from "react";
-import { sticker } from "./picture/images";
+import { sticker } from "../picture/images";
 import { useLocation } from "react-router-dom";
 
 function Marquee({ prpos }) {
