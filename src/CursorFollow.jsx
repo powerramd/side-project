@@ -1,7 +1,10 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useRef, useContext, useLayoutEffect } from "react";
 import { CursorContext } from "./CursorContext";
+import { useLocation } from "react-router-dom";
 
 function CursorFollow({ props }) {
+  //獲取當前URL的位置，useLocation()是react-router-dom的一個hook，包括 pathname、search、hash、state 等屬性。
+  const location = useLocation();
   //這個是可以共享的狀態
   const { state, dispatch } = useContext(CursorContext);
   //這個是拿來使用的共享狀態
@@ -29,6 +32,8 @@ function CursorFollow({ props }) {
     function handleMouseMove(event) {
       const { clientX, clientY } = event; // 從事件對象中獲取滑鼠的客戶端坐標
       trail.current = [...trail.current, { x: clientX, y: clientY }].slice(-50); // 只保留最新的 200 個位置
+      localStorage.setItem("x", clientX);
+      localStorage.setItem("y", clientY);
     }
 
     // 設置滑鼠移動事件監聽器和定時器來更新位置
@@ -57,6 +62,16 @@ function CursorFollow({ props }) {
     };
   }, [dispatch]); // 空依賴性陣列，確保 useEffect 只在組件掛載和卸載時執行
 
+  useLayoutEffect(() => {
+    // 讀取儲存的滑鼠座標
+    const storedMouseX = localStorage.getItem("x");
+    const storedMouseY = localStorage.getItem("y");
+
+    if (storedMouseX && storedMouseY) {
+      dispatch({ type: "SET_POSITION", payload: { x: storedMouseX, y: storedMouseY } });
+    }
+  }, [dispatch, location.pathname]);
+
   //修改 scale 的值的函數----------------------------------------------------------------------------------------------------
   /* eslint-disable-next-line no-unused-vars*/
   function updateScale(newScale) {
@@ -83,7 +98,7 @@ function CursorFollow({ props }) {
   };
   const Fusion_target = {
     position: "absolute",
-    width: "100%",
+    width: props.memenuLayerBgWidth,
     height: "var(--menu-bg-height)",
     top: "0",
     left: "0",

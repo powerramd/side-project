@@ -6,6 +6,7 @@
 .home-container {
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
   width: 100%;
   background: rgba(252, 247, 248, 1);
 }
@@ -17,28 +18,14 @@
 .introduce-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-
-  justify-items: center;
-  align-items: center;
+  justify-content: center;
+  align-items: end;
   width: 100%;
   height: 100%;
 }
 .introduce-cat {
   grid-column: 2;
 }
-
-.slogan {
-  grid-row: 1;
-  text-align: center;
-  font-size: 3em;
-  font-weight: bold;
-}
-.slogan p {
-  font-size: 0.5em;
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-
 .show-product {
   display: grid;
   grid-template-rows: 3fr 1fr;
