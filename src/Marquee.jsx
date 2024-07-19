@@ -1,173 +1,111 @@
-import React, { useEffect, useMemo, useRef, useReducer, useCallback, useState } from "react";
-import { sticker } from "./picture/images";
-import { useLocation } from "react-router-dom";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-function Marquee({ prpos }) {
-  const showContinerRef = useRef();
-  const marqueeRef = useRef();
-  const marqueeRef2 = useRef();
-
-  // const [fatherContiner, setFatherContiner] = useState();
-  // const [showContiner, setshowContiner] = useState();
-  // const [marqueeContiner, setMarqueeContiner] = useState();
-  // const [marqueeContiner2, setMarqueeContiner2] = useState();
+function Marquee({ speed = 1.3 }) {
+  // 跑馬燈移動的值
+  const [carouselTransform, setCarouselTransform] = useState(0);
+  const [carousel2Transform, setCarousel2Transform] = useState(0);
+  // 用來抓取跑馬燈容器的寬度
+  const marqueeRef = useRef(null);
+  const [itemWidth, setItemWidth] = useState(0);
+  // 抓取跑馬燈長度，用來修正要移到螢幕外面的的距離
+  const carouselRef = useRef(null);
+  const carousel2Ref = useRef(null);
+  //用來定初始的位置
+  const [carouselStyleLeft, setCarouselStyleLeft] = useState(0);
+  const [carousel2StyleLeft, setCarousel2StyleLeft] = useState(0);
+  //用來設定卡片大小
+  const [figure, setFigure] = useState(0);
   const cardItems = 5;
 
-  // 動畫名稱
-  const [animationName, setAnimationName] = useState(["marquee1-1"]);
-  const [animationName2, setAnimationName2] = useState(["marquee2-1"]);
-  // 動畫時間
-  const [initSpeed, setinitSpeed] = useState(3);
-  const [animationSpeed, setAnimationSpeed] = useState(initSpeed);
-  const [animationSpeed2, setAnimationSpeed2] = useState(initSpeed);
-  // 第二塊跑馬燈初始位置
-  const [marqueeLeft1, setMarqueeLeft1] = useState(0);
-  const [marqueeLeft2, setMarqueeLeft2] = useState(0);
-  // 移動的距離
-  const [fristMove, setFristMove] = useState(0);
-  const [lastMove, setLastMove] = useState(0);
-  const [fristMove2, setFristMove2] = useState(0);
-  const [lastMove2, setLastMove2] = useState(0);
-
-  // 計算速率與時間，分別丟入原始距離、初始時間、新的距離
-  function calculateNewTime(originalDistance, originalTime, newDistance) {
-    const originalSpeed = originalDistance / originalTime; // 計算原始速度
-    const newTime = newDistance / originalSpeed; // 計算新時間
-    return newTime;
-  }
+  // 控制是否正在調整大小的狀態
 
   // 初始化設定
   useEffect(() => {
-    function init() {
-      if (marqueeRef.current && marqueeRef.current && marqueeRef2.current && prpos.current) {
-        const fatherContiner = prpos.current;
-        const marqueeContiner = marqueeRef.current;
-        const marqueeContiner2 = marqueeRef2.current;
-        // 計算原始速度
-        const originalDistance = fatherContiner.offsetWidth;
-        const originalTime = initSpeed;
-        setLastMove(prpos.current.offsetWidth);
-        setLastMove2(prpos.current.offsetWidth + marqueeRef2.current.offsetWidth);
-
-        // 計算新距離和新時間
-        const newDistance2 = fatherContiner.offsetWidth + marqueeContiner2.offsetWidth;
-
-        const newTime2 = calculateNewTime(originalDistance, originalTime, newDistance2);
-
-        // 將跑第二塊跑馬燈移動到左邊螢幕外
-        setMarqueeLeft2(0 - marqueeRef.current.offsetWidth);
-        // 跑馬燈速率修正速度
-        setAnimationSpeed2(newTime2);
+    const handleResize = () => {
+      if (marqueeRef.current) {
+        // 當容器尺寸變化時更新寬度資訊
+        setItemWidth(marqueeRef.current.offsetWidth);
+        setCarousel2StyleLeft(0 - carousel2Ref.current.offsetWidth);
+        setCarouselStyleLeft(0);
+        //加這兩個可以防止畫面大小改變的時候跑掉
+        setCarouselTransform(0);
+        setCarousel2Transform(0);
+        setFigure(marqueeRef.current.offsetWidth / cardItems);
       }
-    }
-
-    init();
-    window.addEventListener("resize", init);
-    return () => {
-      window.removeEventListener("resize", init);
     };
-  }, [initSpeed, prpos]);
 
-  //動畫重播
+    // 初始設定及 resize 時更新
+    handleResize();
+    // 畫面改變大小的時候觸發
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [figure]);
+
+  // 每5毫秒移動1px，但如果超過畫面邊界就把跑馬燈丟到最前面(螢幕外)重新跑
   useEffect(() => {
-    function handleAnimationEnd() {
-      const repeatMove = (0 - marqueeRef.current.offsetWidth) - Math.abs(prpos.current.offsetWidth - marqueeRef.current.offsetWidth);
-      setFristMove(repeatMove);
-      setAnimationName("marquee1-2");
-      setAnimationSpeed(Math.abs(calculateNewTime(prpos.current.offsetWidth, initSpeed, Math.abs(repeatMove)))+3);
-    }
+    const interval = setInterval(() => {
+      if (carouselTransform > itemWidth) {
+        // 1.5是調整的係數，連接處會小小的誤差，導致雖然不是很明顯但會有斷開的感覺，可能是因為執行順序的關係?
+        setCarouselTransform(0 - carouselRef.current.offsetWidth + 1.5);
+      }
+      setCarouselTransform((prev) => prev + speed);
+    }, 4); // 每隔 5 豪秒切換一次
 
-    const marqueeElement = marqueeRef.current;
-
-    marqueeElement?.addEventListener("animationiteration", handleAnimationEnd);
-
-    return () => {
-      marqueeElement?.removeEventListener("animationend", handleAnimationEnd);
-    };
-  }, [fristMove, initSpeed, prpos]);
+    // 清除 interval，避免內存洩漏
+    return () => clearInterval(interval);
+  }, [carousel2Transform, carouselTransform, itemWidth, speed]);
 
   useEffect(() => {
-    function handleAnimationEnd2() {
+    const interval = setInterval(() => {
+      if (carousel2Transform / 2 > itemWidth) {
+        setCarousel2Transform(0 + 1.5);
+      }
+      setCarousel2Transform((prev) => prev + +speed);
+    }, 4);
+    // 清除 interval，避免內存洩漏
+    return () => clearInterval(interval);
+  }, [carousel2Transform, itemWidth, speed]);
 
-
-      const repeatMove2 = (0 - marqueeRef.current.offsetWidth) - Math.abs(prpos.current.offsetWidth - marqueeRef.current.offsetWidth);
-      setLastMove2(prpos.current.offsetWidth + marqueeRef2.current.offsetWidth + Math.abs(prpos.current.offsetWidth - marqueeRef.current.offsetWidth));
-      console.log(repeatMove2);
-      setFristMove2(repeatMove2);
-      setAnimationName2("marquee2-2");
-      setinitSpeed(Math.abs(calculateNewTime(marqueeRef.current.offsetWidth, initSpeed, Math.abs(repeatMove2))))
-      
-    }
-
-    const marqueeElement2 = marqueeRef2.current;
-
-    marqueeElement2?.addEventListener("animationiteration", handleAnimationEnd2);
-
-    return () => {
-      marqueeElement2?.removeEventListener("animationend", handleAnimationEnd2);
-    };
-  }, [initSpeed, prpos]);
-
-  // 第一次移動
-  useEffect(() => {
-    setLastMove(prpos.current.offsetWidth);
-    setLastMove2(prpos.current.offsetWidth + marqueeRef2.current.offsetWidth);
-  }, [prpos]);
-
-  // 第一個跑馬燈樣式
-  const marqueeStyle = useMemo(
+  const carouselStyle = useMemo(
     () => ({
-      transform: `matrix(1, 0, 0, 1, 0, 0)`,
-      left: `${marqueeLeft1}px`,
-      animation: `${animationName} ${animationSpeed}s infinite linear`,
-      "--first-move": `${fristMove}px`,
-      "--last-move": `${lastMove}px`,
+      transform: `matrix(${1}, 0, 0, ${1}, ${Math.round(carouselTransform)}, ${0})`,
+      left: `${carouselStyleLeft}px`,
     }),
-    [animationName, animationSpeed, fristMove, lastMove, marqueeLeft1]
+    [carouselTransform, carouselStyleLeft]
   );
 
-  // 第二個跑馬燈樣式
-  const marqueeStyle2 = useMemo(
+  const carousel2Style = useMemo(
     () => ({
-      transform: `matrix(1, 0, 0, 1, 0, 0)`,
-      left: `${marqueeLeft2}px`,
-      animation: `${animationName2} ${animationSpeed2}s infinite linear`,
-      "--first-move2": `${fristMove2}px`,
-      "--last-move2": `${lastMove2}px`,
+      transform: `matrix(${1}, 0, 0, ${1}, ${Math.round(carousel2Transform)}, ${0})`,
+      left: `${carousel2StyleLeft}px`,
     }),
-    [animationName2, animationSpeed2, fristMove2, lastMove2, marqueeLeft2]
+    [carousel2Transform, carousel2StyleLeft]
   );
 
-  // 卡片容器樣式
   const figureStyle = useMemo(
     () => ({
-      // height: `calc(${cardSize}px - 2em)`,
-      // width: `${cardSize}px`,
-      height: `384px`,
-      width: `384px`,
+      height: `calc(${figure}px - 2em)`,
+      width: `${figure}px`,
     }),
-    []
+    [figure]
   );
-
-  // 用.map生成卡片元素
+  // 使用 .map() 生成 figure 元素
   const figures = useMemo(
     () =>
       Array(cardItems)
         .fill()
-        .map((_, index) => (
-          <figure key={index} style={figureStyle} className="figure-style">
-            <img src={sticker} alt="" />
-          </figure>
-        )),
+        .map((_, index) => <figure key={index} style={figureStyle} className="figure-style"></figure>),
     [cardItems, figureStyle]
   );
 
   return (
-    <div ref={showContinerRef} className="show-product-continer">
-      <div ref={marqueeRef} style={marqueeStyle} className="show-product-marquee">
+    <div ref={marqueeRef} className="show-product-continer">
+      <div ref={carouselRef} style={carouselStyle} className="show-product-carousel">
         {figures}
       </div>
-      <div ref={marqueeRef2} style={marqueeStyle2} className="show-product-marquee-2">
+      <div ref={carousel2Ref} style={carousel2Style} className="show-product-carousel-2">
         {figures}
       </div>
     </div>
