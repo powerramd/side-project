@@ -21,9 +21,10 @@ function FrontPageSlogan() {
 
   const [scrollProgress, setScrollProgresst] = useState(0);
   const sloganStyle = {
-    height: `calc(${100}% + ${scrollProgress * 0.2}%)`,
+    height: `calc(${100}% - ${scrollProgress*1.5}%)`,
+ 
   };
-
+  console.log(scrollProgress)
 
   useEffect(() => {
     function sticky() {
@@ -35,8 +36,9 @@ function FrontPageSlogan() {
 
 
 
-      if (newScrollPercentage < 45) {
-        setScrollProgresst(100 - scrollY);
+      if (newScrollPercentage < 50) {
+        setScrollProgresst( newScrollPercentage);
+        
       }
     }
 
