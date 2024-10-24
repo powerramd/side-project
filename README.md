@@ -1,5 +1,5 @@
->[!NOTE]
->這是note
+> [!NOTE]
+> 這是note
 
 # Getting Started with Create React App
 
