@@ -62,6 +62,13 @@ function Header() {
       color: "white",
       containerColor: "yellow",
     },
+    {
+      ID: 6,
+      link: "/side-project6",
+      label: "表格",
+      color: "white",
+      containerColor: "rgba(252, 247, 248, 1)",
+    },
   ]);
   //設定菜單背景層(綠色圓角)的寬度初始值
   const [menuLayerBgWidth] = useState(`calc(var(--menu-width) * ${menuItems.length})`);
@@ -95,6 +102,8 @@ function Header() {
           return menuItems[4].ID;
         case menuItems[5].link:
           return menuItems[5].ID;
+        case menuItems[6].link:
+          return menuItems[6].ID;
         default:
           return menuItems[0].ID;
       }
@@ -153,7 +162,7 @@ function Header() {
     //這段函數是垂直滾動的時候將header的背景顏色變成毛玻璃樣式
     function handleScroll() {
       
-      if (window.scrollY > 80) {
+      if (window.scrollY > 1) {
         //當垂直滾動條滾動大於80的時候結果為true
         setContainerClass("scrolling"); //切換成毛玻璃的效果
         setContainerColor("rgba(107, 129, 140, 0.3)"); //將顏色些改為灰色並透明

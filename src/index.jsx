@@ -8,6 +8,7 @@ import "./CSS/Marquee.css"
 import "./CSS/HorizontalScroll.css";
 import "./CSS/CursorFollow.css";
 import "./Test/Css/Test.css";
+import "./CSS/InventoryTable.css";
 
 import App from "./App";
 

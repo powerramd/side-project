@@ -34,6 +34,19 @@ function CursorFollow({ props }) {
       trail.current = [...trail.current, { x: clientX, y: clientY }].slice(-50); // 只保留最新的 200 個位置
       localStorage.setItem("x", clientX);
       localStorage.setItem("y", clientY);
+
+      const elements = document.elementsFromPoint(clientX, clientY);
+      const isHoverTarget = elements.some(el => el.classList.contains("hover-target"));
+  
+      if (isHoverTarget) {
+        dispatch({ type: "SET_ALPHA", payload: 0.1 }); // 範例：透明度變0.5
+        dispatch({ type: "SET_SCALE", payload: 1 }); // 範例：放大1.5倍
+        dispatch({ type: "SET_FILTER", payload: "gooey-hover" }); // 範例：改變濾鏡
+      } else {
+        dispatch({ type: "SET_ALPHA", payload: 1 });
+        dispatch({ type: "SET_SCALE", payload: 1 });
+        dispatch({ type: "SET_FILTER", payload: "gooey" });
+      }
     }
 
     // 設置滑鼠移動事件監聽器和定時器來更新位置

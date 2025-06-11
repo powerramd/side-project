@@ -6,6 +6,7 @@ import Test from "./Test/Test";
 import HorizontalScroll from "./HorizontalScroll";
 import { CursorProvider } from "./CursorContext.jsx";
 import InfiniteCarousel from "./Test/InfiniteCarousel.jsx";
+import Inventory from "./InventoryTable.tsx";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/side-project3" exact element={<Test />}></Route>
           <Route path="/side-project4" exact element={<InfiniteCarousel />}></Route>
           <Route path="/side-project5" exact element={<p>123</p>}></Route>
+          <Route path="/side-project6" exact element={<><Inventory /><Inventory /><Inventory /><Inventory /><Inventory /></>}></Route>
           <Route path="/login" exact element={<p>login</p>}></Route>
         </Routes>
       </CursorProvider>

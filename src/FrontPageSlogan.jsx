@@ -3,8 +3,8 @@ import { CursorContext } from "./CursorContext";
 import {  useLocation } from "react-router-dom";
 
 function FrontPageSlogan() {
-    //獲取當前URL的位置，useLocation()是react-router-dom的一個hook，包括 pathname、search、hash、state 等屬性。
-    const location = useLocation();
+  //獲取當前URL的位置，useLocation()是react-router-dom的一個hook，包括 pathname、search、hash、state 等屬性。
+  const location = useLocation();
   //這個是CursorFollow.jsx的共享狀態
   const { dispatch } = useContext(CursorContext);
 
@@ -51,7 +51,8 @@ function FrontPageSlogan() {
   //刷新載入的時候重新抓取滾動條
   useLayoutEffect(() => {
     const scrollY = window.scrollY;
-    setScrollProgresst(100 - scrollY);
+    // setScrollProgresst(100 - scrollY);
+    
   }, [location.pathname]);
 
   return (

@@ -39,7 +39,7 @@ function Cat() {
     };
   };
   // 滾動螢幕貓咪旋轉效果
-  const [svgRotate, setSvgRotate] = useState(51);
+  const [svgRotate, setSvgRotate] = useState(0);
   useEffect(() => {
     function scrollRotate() {
       const scrollY = window.scrollY;

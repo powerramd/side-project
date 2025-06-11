@@ -1,0 +1,453 @@
+/* 基礎樣式 */
+* {
+  box-sizing: border-box;
+}
+
+.inventory-container {
+  display: flex;
+  height: 100vh;
+  background-color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+}
+
+/* 側邊欄樣式 */
+.sidebar {
+  width: 256px;
+  background: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #e2e8f0;
+}
+
+.sidebar-header {
+  padding: 24px;
+  border-bottom: 1px solid #e2e8f0;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+}
+
+.store-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.store-area {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.store-name {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.store-code {
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.sidebar-content {
+  padding: 16px;
+}
+
+.sidebar-section{
+  margin-bottom: 16px;
+  border-radius: 6px;
+  background: #f1f5f9;
+  width: 100%;
+}
+
+.sidebar-select{
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: white;
+  font-size: 18px;
+  width: 100%;
+}
+
+.page-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.page-btn {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.page-btn:hover {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.page-btn.active {
+  background: #3b82f6;
+  color: white;
+}
+
+/* 主要內容區域 */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header {
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #e2e8f0;
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1e293b;
+  margin: 0 0 4px 0;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.toolbar {
+  background: white;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-container {
+  flex: 1;
+  max-width: 400px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* 按鈕樣式 */
+.btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.btn-primary {
+  background: #3b82f6;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #2563eb;
+}
+
+.btn-danger {
+  background: transparent;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.btn-danger:hover {
+  background: #fef2f2;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #64748b;
+  border: 1px solid #d1d5db;
+}
+
+.btn-outline:hover {
+  background: #f8fafc;
+}
+
+.btn-outline:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-delete {
+  background: transparent;
+  color: #dc2626;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background: #fef2f2;
+}
+
+/* 表格容器 */
+.table-container {
+  flex: 1;
+  overflow: auto;
+  padding: 24px;
+}
+
+.card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 4px 0;
+}
+
+.card-description {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+}
+
+.table-wrapper {
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.inventory-table th {
+  background: #f8fafc;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.inventory-table td {
+  padding: 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.row-even {
+  background: white;
+}
+
+.row-odd {
+  background: #f8fafc;
+}
+
+.inventory-table tr:hover {
+  background: #f1f5f9;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* 產品資訊樣式 */
+.product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.product-name {
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.product-details {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.product-id {
+  background: #f1f5f9;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* 徽章樣式 */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  gap: 4px;
+}
+
+.status-completed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.category-food {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.category-drink {
+  background: #e9d5ff;
+  color: #7c3aed;
+}
+
+.category-supplies {
+  background: #fed7aa;
+  color: #c2410c;
+}
+
+.category-default {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.quantity-badge {
+  font-family: "Monaco", "Menlo", monospace;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.stock-qty {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.count-qty {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.difference {
+  font-weight: 600;
+}
+
+.diff-zero {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.diff-positive {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.diff-negative {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* 表格底部 */
+.table-footer {
+  padding: 16px 24px;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+}
+
+.summary {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.page-info {
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .inventory-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .table-footer {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+}
